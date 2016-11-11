@@ -70,13 +70,18 @@ public class PETER_PlayerCamera : MonoBehaviour
             }
         }
 
-
+        
 
         // translate camera to match TargetPos
         float frameMov = CamMovSpeed * Time.deltaTime;
         CamTargetRay.transform.position = Vector3.Lerp(CamTargetRay.transform.position, CamTargetPos.transform.position, frameMov);
         CamMain.transform.position = CamTargetRay.position;
-        
+
+        // rotate camera to face TargetAim
+        float frameRot = CamRotSpeed * Time.deltaTime;
+        CamAim.position = Vector3.Lerp(CamAim.position, CamTargetAim.position, frameRot);
+        CamMain.transform.LookAt(CamAim.position);
+
         // translate camera forward if it's colliding with objects tagged "enviroCamCollider"
         Vector3 camRayDir = CamTargetRay.position - CamAim.position;
         RaycastHit[] camRayHits = Physics.RaycastAll(CamAim.position, camRayDir, camRayDir.magnitude);
@@ -84,18 +89,16 @@ public class PETER_PlayerCamera : MonoBehaviour
         {
             if (camRayHits[i].transform.tag == "enviroCamCollider")
             {
-                Debug.Log("fuck a my assa");
-                CamMain.transform.position = camRayHits[i].point;
-                CamMain.transform.position = Vector3.Lerp(CamMain.transform.position, CamAim.position, 0.1f);
-                break;
+                Vector3 playerHitDir = camRayHits[i].point - PlayerModel.position;
+                if (Vector3.Dot(playerHitDir.normalized, CamMain.transform.forward) < 0)
+                {
+                    CamMain.transform.position = camRayHits[i].point;
+                    CamMain.transform.position = Vector3.Lerp(CamMain.transform.position, CamAim.position, 0.03f);
+                    break;
+                }
             }
         }
-
-        // rotate camera to face TargetAim
-        float frameRot = CamRotSpeed * Time.deltaTime;
-        CamAim.position = Vector3.Lerp(CamAim.position, CamTargetAim.position, frameRot);
-        CamMain.transform.LookAt(CamAim.position);
-
+        
 
 
         /// =-=-=-=-=-=
