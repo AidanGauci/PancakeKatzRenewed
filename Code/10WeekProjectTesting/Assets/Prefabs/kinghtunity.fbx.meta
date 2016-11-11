@@ -1,0 +1,313 @@
+fileFormatVersion: 2
+guid: a55df466f5da4e04bb4629b44c2faafb
+timeCreated: 1475815335
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Base
+    100002: Chest
+    100004: Head
+    100006: //RootNode
+    100008: L_Elbow
+    100010: L_Foot
+    100012: L_Hand
+    100014: L_Hip
+    100016: L_Knee
+    100018: L_Shoulder
+    100020: L_Toe
+    100022: Mech
+    100024: R_Elbow
+    100026: R_Foot
+    100028: R_Hand
+    100030: R_Hip
+    100032: R_Knee
+    100034: R_Shoulder
+    100036: R_Toe
+    400000: Base
+    400002: Chest
+    400004: Head
+    400006: //RootNode
+    400008: L_Elbow
+    400010: L_Foot
+    400012: L_Hand
+    400014: L_Hip
+    400016: L_Knee
+    400018: L_Shoulder
+    400020: L_Toe
+    400022: Mech
+    400024: R_Elbow
+    400026: R_Foot
+    400028: R_Hand
+    400030: R_Hip
+    400032: R_Knee
+    400034: R_Shoulder
+    400036: R_Toe
+    4300000: Mech
+    7400000: IdleAnimate
+    7400002: RunAnimate
+    7400004: AttackAnimate
+    9500000: //RootNode
+    13700000: Mech
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: IdleAnimate
+      takeName: Take 001
+      firstFrame: 10
+      lastFrame: 40
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Chest
+        weight: 1
+      - path: Base/Chest/Head
+        weight: 1
+      - path: Base/Chest/L_Shoulder
+        weight: 1
+      - path: Base/Chest/L_Shoulder/L_Elbow
+        weight: 1
+      - path: Base/Chest/L_Shoulder/L_Elbow/L_Hand
+        weight: 1
+      - path: Base/Chest/R_Shoulder
+        weight: 1
+      - path: Base/Chest/R_Shoulder/R_Elbow
+        weight: 1
+      - path: Base/Chest/R_Shoulder/R_Elbow/R_Hand
+        weight: 1
+      - path: Base/L_Hip
+        weight: 1
+      - path: Base/L_Hip/L_Knee
+        weight: 1
+      - path: Base/L_Hip/L_Knee/L_Foot
+        weight: 1
+      - path: Base/L_Hip/L_Knee/L_Foot/L_Toe
+        weight: 1
+      - path: Base/R_Hip
+        weight: 1
+      - path: Base/R_Hip/R_Knee
+        weight: 1
+      - path: Base/R_Hip/R_Knee/R_Foot
+        weight: 1
+      - path: Base/R_Hip/R_Knee/R_Foot/R_Toe
+        weight: 1
+      - path: Mech
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: RunAnimate
+      takeName: Take 001
+      firstFrame: 50
+      lastFrame: 70
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Chest
+        weight: 1
+      - path: Base/Chest/Head
+        weight: 1
+      - path: Base/Chest/L_Shoulder
+        weight: 1
+      - path: Base/Chest/L_Shoulder/L_Elbow
+        weight: 1
+      - path: Base/Chest/L_Shoulder/L_Elbow/L_Hand
+        weight: 1
+      - path: Base/Chest/R_Shoulder
+        weight: 1
+      - path: Base/Chest/R_Shoulder/R_Elbow
+        weight: 1
+      - path: Base/Chest/R_Shoulder/R_Elbow/R_Hand
+        weight: 1
+      - path: Base/L_Hip
+        weight: 1
+      - path: Base/L_Hip/L_Knee
+        weight: 1
+      - path: Base/L_Hip/L_Knee/L_Foot
+        weight: 1
+      - path: Base/L_Hip/L_Knee/L_Foot/L_Toe
+        weight: 1
+      - path: Base/R_Hip
+        weight: 1
+      - path: Base/R_Hip/R_Knee
+        weight: 1
+      - path: Base/R_Hip/R_Knee/R_Foot
+        weight: 1
+      - path: Base/R_Hip/R_Knee/R_Foot/R_Toe
+        weight: 1
+      - path: Mech
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: AttackAnimate
+      takeName: Take 001
+      firstFrame: 80
+      lastFrame: 95
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Base
+        weight: 1
+      - path: Base/Chest
+        weight: 1
+      - path: Base/Chest/Head
+        weight: 1
+      - path: Base/Chest/L_Shoulder
+        weight: 1
+      - path: Base/Chest/L_Shoulder/L_Elbow
+        weight: 1
+      - path: Base/Chest/L_Shoulder/L_Elbow/L_Hand
+        weight: 1
+      - path: Base/Chest/R_Shoulder
+        weight: 1
+      - path: Base/Chest/R_Shoulder/R_Elbow
+        weight: 1
+      - path: Base/Chest/R_Shoulder/R_Elbow/R_Hand
+        weight: 1
+      - path: Base/L_Hip
+        weight: 1
+      - path: Base/L_Hip/L_Knee
+        weight: 1
+      - path: Base/L_Hip/L_Knee/L_Foot
+        weight: 1
+      - path: Base/L_Hip/L_Knee/L_Foot/L_Toe
+        weight: 1
+      - path: Base/R_Hip
+        weight: 1
+      - path: Base/R_Hip/R_Knee
+        weight: 1
+      - path: Base/R_Hip/R_Knee/R_Foot
+        weight: 1
+      - path: Base/R_Hip/R_Knee/R_Foot/R_Toe
+        weight: 1
+      - path: Mech
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
