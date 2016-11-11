@@ -14,7 +14,9 @@ public class UIManager_Aidan : MonoBehaviour {
     public Image[] healthIcons;
     public int allyCurrentCount { get; private set; }
     [HideInInspector]
-    public bool wallTriggered = false;
+    public bool tutorialInvisibleWallTriggered = false;
+    [HideInInspector]
+    public bool tutorialWallTriggered = false;
 
     PickupSword_Aidan pickup;
     float deactivateTime1;
@@ -41,7 +43,7 @@ public class UIManager_Aidan : MonoBehaviour {
             saveAllyBackgrounds[1].gameObject.SetActive(false);
         }
 
-        if (wallTriggered)
+        if (tutorialInvisibleWallTriggered)
         {
             if (!pickup.isSwordTaken)
             {
@@ -50,6 +52,12 @@ public class UIManager_Aidan : MonoBehaviour {
                 swordText.text = "Get back to work!";
             }
         }
+        if (tutorialWallTriggered)
+        {
+            swordText.gameObject.SetActive(true);
+            swordTextBackground.gameObject.SetActive(true);
+        }
+
     }
 
     public void OnAllyCountChange()
@@ -75,6 +83,4 @@ public class UIManager_Aidan : MonoBehaviour {
             saveAllyBackgrounds[0].gameObject.SetActive(true);
         }
     }
-
-    
 }

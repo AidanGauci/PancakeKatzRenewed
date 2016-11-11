@@ -8,6 +8,7 @@ public class AllyAI_Aidan : MonoBehaviour {
 
     [HideInInspector]
     public NavMeshAgent navigator;
+    [HideInInspector]
 
     //public variables
     [Header("Variables to Assign")]
@@ -31,7 +32,7 @@ public class AllyAI_Aidan : MonoBehaviour {
     Transform mainCamera;
     UIManager_Aidan UI;
     CapsuleCollider myCollider;
-    float endWaitTime;
+    float endWaitTime = float.PositiveInfinity;
     float waitTimeForCollider = float.PositiveInfinity;
     bool canPress = true;
     bool talkedToAlly = false;
@@ -49,6 +50,7 @@ public class AllyAI_Aidan : MonoBehaviour {
 
     void Update()
     {
+        print(canPress);
         Vector3 directionToPlayer = (transform.position - playerT.transform.position) * -1f;
         if (canPress && !hasBeenTalkedTo && Input.GetKeyDown(KeyCode.E))
         {
@@ -113,6 +115,7 @@ public class AllyAI_Aidan : MonoBehaviour {
 
     void OnFinishTalking()
     {
+        print("running OnFinishTalking");
         navigator.SetDestination(doorPos.position);
         canPress = true;
         talkedToAlly = false;

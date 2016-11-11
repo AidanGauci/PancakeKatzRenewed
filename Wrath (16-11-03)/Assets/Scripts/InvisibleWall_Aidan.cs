@@ -21,7 +21,7 @@ public class InvisibleWall_Aidan : MonoBehaviour {
         Debug.Log("POOP");
         if (hit.tag == "Player")
         {
-            UI.wallTriggered = true;
+            UI.tutorialInvisibleWallTriggered = true;
         }
     }
 
@@ -30,7 +30,7 @@ public class InvisibleWall_Aidan : MonoBehaviour {
         print("hitting tutorial trigger");
         if (hit.tag == "Player")
         {
-            UI.wallTriggered = false;
+            UI.tutorialInvisibleWallTriggered = false;
         }
     }
 }

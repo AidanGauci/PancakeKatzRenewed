@@ -3,15 +3,25 @@ using System.Collections;
 
 public class PickupSword_Aidan : MonoBehaviour
 {
-
+    [HideInInspector]
+    public bool isSwordTaken = false;
     public float checkDistance = 1f;
+    public float keepTextActive = 1f;
+    public string toSayBeforeSword;
+    public string toSayAfterSword;
 
     PETER_PlayerAttack playerRef;
+    AllyAI_Aidan[] allAllies;
+    TutorialWallTriggers[] tutorialTriggers;
     UIManager_Aidan UI;
-    public bool isSwordTaken;
+    float toSayTime;
+    bool toSayActivated = false;
+    bool toSayFinished = false;
 
     void Start()
     {
+        allAllies = FindObjectsOfType<AllyAI_Aidan>();
+        tutorialTriggers = FindObjectsOfType<TutorialWallTriggers>();
         playerRef = FindObjectOfType<PETER_PlayerAttack>();
         UI = FindObjectOfType<UIManager_Aidan>();
     }
@@ -22,12 +32,22 @@ public class PickupSword_Aidan : MonoBehaviour
         {
             if (CircleCircleCheck(transform.position, 1, playerRef.transform.position, checkDistance))
             {
-                UI.swordText.text = "Press E to pickup Sword";
+                UI.swordText.text = toSayBeforeSword;
                 UI.swordText.gameObject.SetActive(true);
                 UI.swordTextBackground.gameObject.SetActive(true);
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
+                    for (int i = 0; i < tutorialTriggers.Length; i++)
+                    {
+                        tutorialTriggers[i].tutorialFinished = true;
+                    }
+
+                    for (int i = 0; i < allAllies.Length; i++)
+                    {
+                        allAllies[i].canPress = true;
+                    }
+
                     isSwordTaken = true;
                     UI.swordText.gameObject.SetActive(false);
                     UI.swordTextBackground.gameObject.SetActive(false);
@@ -40,16 +60,37 @@ public class PickupSword_Aidan : MonoBehaviour
                     sword.gameObject.SetActive(true);
                     playerRef.hasWeapon = true;
 
-                    gameObject.SetActive(false);
+                    GetComponentInChildren<MeshRenderer>().enabled = false;
+                    playerRef.GetComponent<NavMeshAgent>().areaMask = 10001;
 
                     Debug.Log("TUTORIAL COMPLETE");
-                    playerRef.GetComponent<NavMeshAgent>().areaMask = 10001;
                 }
             }
-            else if (!CircleCircleCheck(transform.position, 1, playerRef.transform.position, checkDistance) && !UI.wallTriggered)
+            else if (!CircleCircleCheck(transform.position, 1, playerRef.transform.position, checkDistance) && !UI.tutorialInvisibleWallTriggered && !UI.tutorialWallTriggered)
             {
                 UI.swordText.gameObject.SetActive(false);
                 UI.swordTextBackground.gameObject.SetActive(false);
+            }
+        }
+        else if (isSwordTaken)
+        {
+            if (!toSayActivated && !toSayFinished)
+            {
+                toSayTime = Time.time + keepTextActive;
+                toSayActivated = true;
+                UI.swordText.gameObject.SetActive(true);
+                UI.swordText.text = toSayAfterSword;
+                UI.swordTextBackground.gameObject.SetActive(true);
+            }
+            else if (toSayActivated && !toSayFinished)
+            {
+                if (toSayTime <= Time.time)
+                {
+                    UI.swordText.text = "";
+                    UI.swordText.gameObject.SetActive(false);
+                    UI.swordTextBackground.gameObject.SetActive(false);
+                    toSayFinished = true;
+                }
             }
         }
     }
