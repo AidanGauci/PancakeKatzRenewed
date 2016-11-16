@@ -13,6 +13,7 @@ public class UIManager_Aidan : MonoBehaviour {
     public Image[] saveAllyBackgrounds;
     public Image[] healthIcons;
     public GameObject firstEnemy;
+    public float textAfterKillGuard = 2f;
     public int allyCurrentCount { get; private set; }
     [HideInInspector]
     public bool tutorialInvisibleWallTriggered = false;
@@ -22,6 +23,8 @@ public class UIManager_Aidan : MonoBehaviour {
     PickupSword_Aidan pickup;
     float deactivateTime1;
     float deactivateTime2;
+    float deactivateTime3 = float.PositiveInfinity;
+    bool canActivate = false;
 
     void Start()
     {
@@ -60,9 +63,11 @@ public class UIManager_Aidan : MonoBehaviour {
             }
             else if (pickup.isSwordTaken && firstEnemy == null)
             {
-                swordText.gameObject.SetActive(false);
-                swordTextBackground.gameObject.SetActive(false);
-                swordText.text = "";
+                swordText.gameObject.SetActive(true);
+                swordTextBackground.gameObject.SetActive(true);
+                swordText.text = "Now I can free the miner!";
+                deactivateTime3 = Time.time + textAfterKillGuard;
+                canActivate = true;
             }
         }
         else
@@ -79,7 +84,20 @@ public class UIManager_Aidan : MonoBehaviour {
             swordText.gameObject.SetActive(true);
             swordTextBackground.gameObject.SetActive(true);
         }
+        
+        if (canActivate)
+        {
+            swordText.gameObject.SetActive(true);
+            swordTextBackground.gameObject.SetActive(true);
+            swordText.text = "Now I can free the miners by pressing 'E'!";
+        }
 
+        if (deactivateTime3 <= Time.time && firstEnemy == null)
+        {
+            swordText.gameObject.SetActive(false);
+            swordTextBackground.gameObject.SetActive(false);
+            swordText.text = "";
+        }
     }
 
     public void OnAllyCountChange()
