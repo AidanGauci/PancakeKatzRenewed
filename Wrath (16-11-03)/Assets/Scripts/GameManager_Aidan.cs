@@ -2,7 +2,10 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class GameManager_Aidan : MonoBehaviour {
+public class GameManager_Aidan : MonoBehaviour
+{
+
+    public bool startWithMouse;
 
     [HideInInspector]
     public bool isSwordTaken = false;
@@ -32,15 +35,34 @@ public class GameManager_Aidan : MonoBehaviour {
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        // Cursor visibility code   ----------------------
+        Cursor.visible = startWithMouse;
+
+        if (Cursor.visible)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else if (!Cursor.visible)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        //  ----------------------------------------------
     }
 
     void Update()
     {
+
+        // Cursor visibility and Escape code    ----------
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Cursor.visible = !Cursor.visible;
+            if (Application.isEditor)
+            {
+                Cursor.visible = !Cursor.visible;
+            }
+            else
+            {
+                /// PAUSE MENU FUNCTION INSERT HERE
+            }
         }
 
         if (Cursor.visible)
@@ -51,6 +73,8 @@ public class GameManager_Aidan : MonoBehaviour {
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
+        //  ----------------------------------------------
+
 
         if (isDoorBroken)
         {
