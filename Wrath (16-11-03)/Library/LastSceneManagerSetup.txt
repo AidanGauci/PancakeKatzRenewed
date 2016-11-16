@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/scenes/aidan_working_scene.unity
+- path: Assets/scenes/MainMenuScene.unity
   isLoaded: 1
   isActive: 1
