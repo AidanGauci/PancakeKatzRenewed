@@ -5,22 +5,24 @@ public class PickupSword_Aidan : MonoBehaviour
 {
     [HideInInspector]
     public bool isSwordTaken = false;
+    [HideInInspector]
+    public bool toSayFinished = false;
+
     public float checkDistance = 1f;
     public float keepTextActive = 1f;
     public string toSayBeforeSword;
     public string toSayAfterSword;
 
     PETER_PlayerAttack playerRef;
-    AllyAI_Aidan[] allAllies;
     TutorialWallTriggers[] tutorialTriggers;
     UIManager_Aidan UI;
+    GameManager_Aidan gameManager;
     float toSayTime;
     bool toSayActivated = false;
-    bool toSayFinished = false;
 
     void Start()
     {
-        allAllies = FindObjectsOfType<AllyAI_Aidan>();
+        gameManager = FindObjectOfType<GameManager_Aidan>();
         tutorialTriggers = FindObjectsOfType<TutorialWallTriggers>();
         playerRef = FindObjectOfType<PETER_PlayerAttack>();
         UI = FindObjectOfType<UIManager_Aidan>();
@@ -43,11 +45,7 @@ public class PickupSword_Aidan : MonoBehaviour
                         tutorialTriggers[i].tutorialFinished = true;
                     }
 
-                    for (int i = 0; i < allAllies.Length; i++)
-                    {
-                        allAllies[i].canPress = true;
-                    }
-
+                    GameManager_Aidan.instance.isSwordTaken = true;
                     isSwordTaken = true;
                     UI.swordText.gameObject.SetActive(false);
                     UI.swordTextBackground.gameObject.SetActive(false);
@@ -62,8 +60,6 @@ public class PickupSword_Aidan : MonoBehaviour
 
                     GetComponentInChildren<MeshRenderer>().enabled = false;
                     playerRef.GetComponent<NavMeshAgent>().areaMask = 10001;
-
-                    Debug.Log("TUTORIAL COMPLETE");
                 }
             }
             else if (!CircleCircleCheck(transform.position, 1, playerRef.transform.position, checkDistance) && !UI.tutorialInvisibleWallTriggered && !UI.tutorialWallTriggered)
@@ -72,7 +68,7 @@ public class PickupSword_Aidan : MonoBehaviour
                 UI.swordTextBackground.gameObject.SetActive(false);
             }
         }
-        else if (isSwordTaken)
+        else if (isSwordTaken && !UI.tutorialInvisibleWallTriggered)
         {
             if (!toSayActivated && !toSayFinished)
             {

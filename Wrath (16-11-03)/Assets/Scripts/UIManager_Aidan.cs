@@ -12,6 +12,7 @@ public class UIManager_Aidan : MonoBehaviour {
     public Text[] saveAllyTexts;
     public Image[] saveAllyBackgrounds;
     public Image[] healthIcons;
+    public GameObject firstEnemy;
     public int allyCurrentCount { get; private set; }
     [HideInInspector]
     public bool tutorialInvisibleWallTriggered = false;
@@ -50,6 +51,27 @@ public class UIManager_Aidan : MonoBehaviour {
                 swordText.gameObject.SetActive(true);
                 swordTextBackground.gameObject.SetActive(true);
                 swordText.text = "Get back to work!";
+            }
+            else if (pickup.isSwordTaken && firstEnemy != null)
+            {
+                swordText.gameObject.SetActive(true);
+                swordTextBackground.gameObject.SetActive(true);
+                swordText.text = "Press left-click to attack the guard and escape!";
+            }
+            else if (pickup.isSwordTaken && firstEnemy == null)
+            {
+                swordText.gameObject.SetActive(false);
+                swordTextBackground.gameObject.SetActive(false);
+                swordText.text = "";
+            }
+        }
+        else
+        {
+            if (pickup.isSwordTaken && pickup.toSayFinished)
+            {
+                swordText.gameObject.SetActive(false);
+                swordTextBackground.gameObject.SetActive(false);
+                swordText.text = "";
             }
         }
         if (tutorialWallTriggered)

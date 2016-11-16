@@ -26,11 +26,6 @@ public class TEST_BasicEnemyAI : MonoBehaviour {
         {
             navigator.SetDestination(originalPosition);
         }
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            int fred = 11;
-            //navigator.areaMask = fred.;
-        }
     }
 
     bool CircleCircleCheck(Vector3 P1, float R1, Vector3 P2, float R2)
