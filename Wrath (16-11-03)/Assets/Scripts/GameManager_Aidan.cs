@@ -5,17 +5,19 @@ using UnityEngine.SceneManagement;
 public class GameManager_Aidan : MonoBehaviour {
 
     [HideInInspector]
+    public bool isSwordTaken = false;
+    [HideInInspector]
     public bool isDoorBroken = false;
+    [HideInInspector]
+    public bool isInGameScene = false;
     public static GameManager_Aidan instance = null;
 
-    EndRoomAllyLocations_Aidan endRoomLocations;
-    AllyAI_Aidan[] allAllies;
+    EndRoomAllyLocations_Aidan endRoomLocations = null;
+    AllyAI_Aidan[] allAllies = null;
+    bool hasInitializedVariables = false;
 
     void Awake()
     {
-        endRoomLocations = FindObjectOfType<EndRoomAllyLocations_Aidan>();
-        allAllies = FindObjectsOfType<AllyAI_Aidan>();
-
         if (instance == null)
         {
             instance = this;
@@ -30,8 +32,8 @@ public class GameManager_Aidan : MonoBehaviour {
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     void Update()
@@ -45,7 +47,7 @@ public class GameManager_Aidan : MonoBehaviour {
         {
             Cursor.lockState = CursorLockMode.None;
         }
-        else
+        else if (!Cursor.visible)
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
@@ -53,6 +55,19 @@ public class GameManager_Aidan : MonoBehaviour {
         if (isDoorBroken)
         {
             SetEndDestination();
+        }
+        if (isSwordTaken)
+        {      
+            allAllies = FindObjectsOfType<AllyAI_Aidan>();
+
+            int prng = Random.Range(0, 100);
+            for (int i = 0; i < allAllies.Length; i++)
+            {
+                allAllies[i].swordObtained = true;
+                allAllies[i].textChoicesSeed = prng;
+            }
+
+            isSwordTaken = false;
         }
     }
 
@@ -82,6 +97,8 @@ public class GameManager_Aidan : MonoBehaviour {
         Cursor.visible = true;
         allAllies = null;
         endRoomLocations = null;
+        isInGameScene = false;
+        hasInitializedVariables = false;
         SceneManager.LoadScene("EndGameScene");
     }
 }

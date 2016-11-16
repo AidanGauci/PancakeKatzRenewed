@@ -12,9 +12,12 @@ public class UIManager_Aidan : MonoBehaviour {
     public Text[] saveAllyTexts;
     public Image[] saveAllyBackgrounds;
     public Image[] healthIcons;
+    public GameObject firstEnemy;
     public int allyCurrentCount { get; private set; }
     [HideInInspector]
-    public bool wallTriggered = false;
+    public bool tutorialInvisibleWallTriggered = false;
+    [HideInInspector]
+    public bool tutorialWallTriggered = false;
 
     PickupSword_Aidan pickup;
     float deactivateTime1;
@@ -41,7 +44,7 @@ public class UIManager_Aidan : MonoBehaviour {
             saveAllyBackgrounds[1].gameObject.SetActive(false);
         }
 
-        if (wallTriggered)
+        if (tutorialInvisibleWallTriggered)
         {
             if (!pickup.isSwordTaken)
             {
@@ -49,7 +52,34 @@ public class UIManager_Aidan : MonoBehaviour {
                 swordTextBackground.gameObject.SetActive(true);
                 swordText.text = "Get back to work!";
             }
+            else if (pickup.isSwordTaken && firstEnemy != null)
+            {
+                swordText.gameObject.SetActive(true);
+                swordTextBackground.gameObject.SetActive(true);
+                swordText.text = "Press left-click to attack the guard and escape!";
+            }
+            else if (pickup.isSwordTaken && firstEnemy == null)
+            {
+                swordText.gameObject.SetActive(false);
+                swordTextBackground.gameObject.SetActive(false);
+                swordText.text = "";
+            }
         }
+        else
+        {
+            if (pickup.isSwordTaken && pickup.toSayFinished)
+            {
+                swordText.gameObject.SetActive(false);
+                swordTextBackground.gameObject.SetActive(false);
+                swordText.text = "";
+            }
+        }
+        if (tutorialWallTriggered)
+        {
+            swordText.gameObject.SetActive(true);
+            swordTextBackground.gameObject.SetActive(true);
+        }
+
     }
 
     public void OnAllyCountChange()
@@ -75,6 +105,4 @@ public class UIManager_Aidan : MonoBehaviour {
             saveAllyBackgrounds[0].gameObject.SetActive(true);
         }
     }
-
-    
 }
