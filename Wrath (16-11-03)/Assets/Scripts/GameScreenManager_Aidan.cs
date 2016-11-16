@@ -30,7 +30,13 @@ public class GameScreenManager_Aidan : MonoBehaviour {
                 resolutionToggles[i].isOn = (i == activeScreenResIndex);
             }
 
-            fullscreenToggle.isOn = isFullscreen;
+            if (isFullscreen)
+            {
+                fullscreenToggle.isOn = isFullscreen;
+                Resolution[] allResolutions = Screen.resolutions;
+                Resolution maxResolution = allResolutions[allResolutions.Length - 1];
+                Screen.SetResolution(maxResolution.width, maxResolution.height, true);
+            }
         }
     }
 
