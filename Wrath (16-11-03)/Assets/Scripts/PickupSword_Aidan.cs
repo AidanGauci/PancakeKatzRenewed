@@ -14,7 +14,7 @@ public class PickupSword_Aidan : MonoBehaviour
     public string toSayAfterSword;
 
     PETER_PlayerAttack playerRef;
-    TutorialWallTriggers[] tutorialTriggers;
+    TutorialWallTriggers_Aidan[] tutorialTriggers;
     UIManager_Aidan UI;
     GameManager_Aidan gameManager;
     float toSayTime;
@@ -23,7 +23,7 @@ public class PickupSword_Aidan : MonoBehaviour
     void Start()
     {
         gameManager = FindObjectOfType<GameManager_Aidan>();
-        tutorialTriggers = FindObjectsOfType<TutorialWallTriggers>();
+        tutorialTriggers = FindObjectsOfType<TutorialWallTriggers_Aidan>();
         playerRef = FindObjectOfType<PETER_PlayerAttack>();
         UI = FindObjectOfType<UIManager_Aidan>();
     }
@@ -45,7 +45,6 @@ public class PickupSword_Aidan : MonoBehaviour
                         tutorialTriggers[i].tutorialFinished = true;
                     }
 
-                    GameManager_Aidan.instance.isSwordTaken = true;
                     isSwordTaken = true;
                     UI.swordText.gameObject.SetActive(false);
                     UI.swordTextBackground.gameObject.SetActive(false);
@@ -59,7 +58,6 @@ public class PickupSword_Aidan : MonoBehaviour
                     playerRef.hasWeapon = true;
 
                     GetComponentInChildren<MeshRenderer>().enabled = false;
-                    playerRef.GetComponent<NavMeshAgent>().areaMask = 10001;
                 }
             }
             else if (!CircleCircleCheck(transform.position, 1, playerRef.transform.position, checkDistance) && !UI.tutorialInvisibleWallTriggered && !UI.tutorialWallTriggered)

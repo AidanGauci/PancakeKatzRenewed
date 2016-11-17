@@ -8,7 +8,7 @@ public class GameManager_Aidan : MonoBehaviour
     public bool startWithMouse;
 
     [HideInInspector]
-    public bool isSwordTaken = false;
+    public bool isFirstEnemyKilled = false;
     [HideInInspector]
     public bool isDoorBroken = false;
     [HideInInspector]
@@ -80,7 +80,7 @@ public class GameManager_Aidan : MonoBehaviour
         {
             SetEndDestination();
         }
-        if (isSwordTaken)
+        if (isFirstEnemyKilled)
         {      
             allAllies = FindObjectsOfType<AllyAI_Aidan>();
 
@@ -91,7 +91,7 @@ public class GameManager_Aidan : MonoBehaviour
                 allAllies[i].textChoicesSeed = prng;
             }
 
-            isSwordTaken = false;
+            isFirstEnemyKilled = false;
         }
     }
 
@@ -112,6 +112,7 @@ public class GameManager_Aidan : MonoBehaviour
             int modNum = i % endRoomLocations.allEndAllyLocations.Length;
             allAllies[i].SetEndDestination(endRoomLocations.allEndAllyLocations[modNum].position);
         }
+        FindObjectOfType<PETER_PlayerMovement>().GetComponent<NavMeshAgent>().areaMask = 10011;
 
         isDoorBroken = false;
     }

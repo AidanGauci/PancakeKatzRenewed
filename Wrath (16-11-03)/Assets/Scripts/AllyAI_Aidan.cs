@@ -9,7 +9,7 @@ public class AllyAI_Aidan : MonoBehaviour {
     [HideInInspector]
     public NavMeshAgent navigator;
     [HideInInspector]
-    public bool doneBefore {get; private set;}
+    public bool hasTalkedToPlayer {get; private set;}
     [HideInInspector]
     public bool swordObtained = false;
     [HideInInspector]
@@ -53,6 +53,7 @@ public class AllyAI_Aidan : MonoBehaviour {
     void Awake()
     {
         currentStringIndex = 0;
+        hasTalkedToPlayer = false;
         myCollider = GetComponent<CapsuleCollider>();
         navigator = GetComponent<NavMeshAgent>();
         UI = FindObjectOfType<UIManager_Aidan>();
@@ -147,6 +148,7 @@ public class AllyAI_Aidan : MonoBehaviour {
         canPress = true;
         talkedToAlly = false;
         hasBeenTalkedTo = true;
+        hasTalkedToPlayer = true;
     }
 
     public void SetEndDestination(Vector3 position)
