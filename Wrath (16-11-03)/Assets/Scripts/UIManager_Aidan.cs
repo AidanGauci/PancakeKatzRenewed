@@ -21,18 +21,31 @@ public class UIManager_Aidan : MonoBehaviour {
     public bool tutorialWallTriggered = false;
 
     PickupSword_Aidan pickup;
+    TutorialWallTriggers_Aidan[] tutorialWalls;
     float deactivateTime1;
     float deactivateTime2;
     float deactivateTime3 = float.PositiveInfinity;
     bool canActivate = false;
+    bool stopNullRepeat = false;
 
     void Start()
     {
+        tutorialWalls = FindObjectsOfType<TutorialWallTriggers_Aidan>();
         pickup = FindObjectOfType<PickupSword_Aidan>();
     }
 
     void Update()
     {
+        if (firstEnemy == null && !stopNullRepeat)
+        {
+            for (int i = 0; i < tutorialWalls.Length; i++)
+            {
+                tutorialWalls[i].guardKilled = true;
+            }
+            FindObjectOfType<GameManager_Aidan>().isFirstEnemyKilled = true;
+            canActivate = true;
+            stopNullRepeat = true;
+        }
         if (deactivateTime1 <= Time.time)
         {
             saveAllyTexts[0].text = "";
@@ -59,20 +72,19 @@ public class UIManager_Aidan : MonoBehaviour {
             {
                 swordText.gameObject.SetActive(true);
                 swordTextBackground.gameObject.SetActive(true);
-                swordText.text = "Press left-click to attack the guard and escape!";
+                swordText.text = "Press left-click to attack the guard!";
             }
-            else if (pickup.isSwordTaken && firstEnemy == null)
+            else if (pickup.isSwordTaken && firstEnemy == null && canActivate)
             {
                 swordText.gameObject.SetActive(true);
                 swordTextBackground.gameObject.SetActive(true);
-                swordText.text = "Now I can free the miner!";
+                swordText.text = "Now I can free the miners by pressing 'E'!";
                 deactivateTime3 = Time.time + textAfterKillGuard;
-                canActivate = true;
             }
         }
         else
         {
-            if (pickup.isSwordTaken && pickup.toSayFinished)
+            if (pickup.isSwordTaken && pickup.toSayFinished && !tutorialWallTriggered)
             {
                 swordText.gameObject.SetActive(false);
                 swordTextBackground.gameObject.SetActive(false);
@@ -92,11 +104,12 @@ public class UIManager_Aidan : MonoBehaviour {
             swordText.text = "Now I can free the miners by pressing 'E'!";
         }
 
-        if (deactivateTime3 <= Time.time && firstEnemy == null)
+        if (deactivateTime3 <= Time.time && firstEnemy == null && !tutorialWallTriggered)
         {
             swordText.gameObject.SetActive(false);
             swordTextBackground.gameObject.SetActive(false);
             swordText.text = "";
+            canActivate = false;
         }
     }
 

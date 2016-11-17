@@ -11,6 +11,7 @@ public class AudioManager_Aidan : MonoBehaviour {
     public static AudioManager_Aidan instance = null;
 
     int activeMusicSourceIndex;
+    bool activateRandomPick = false;
     AudioSource[] musicSources;
 
     void Start()

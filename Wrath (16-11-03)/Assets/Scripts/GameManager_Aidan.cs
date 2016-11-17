@@ -8,7 +8,7 @@ public class GameManager_Aidan : MonoBehaviour
     public bool startWithMouse;
 
     [HideInInspector]
-    public bool isSwordTaken = false;
+    public bool isFirstEnemyKilled = false;
     [HideInInspector]
     public bool isDoorBroken = false;
     [HideInInspector]
@@ -80,7 +80,7 @@ public class GameManager_Aidan : MonoBehaviour
         {
             SetEndDestination();
         }
-        if (isSwordTaken)
+        if (isFirstEnemyKilled)
         {      
             allAllies = FindObjectsOfType<AllyAI_Aidan>();
 
@@ -91,7 +91,7 @@ public class GameManager_Aidan : MonoBehaviour
                 allAllies[i].textChoicesSeed = prng;
             }
 
-            isSwordTaken = false;
+            isFirstEnemyKilled = false;
         }
     }
 
