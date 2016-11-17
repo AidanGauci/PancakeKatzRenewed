@@ -112,6 +112,7 @@ public class GameManager_Aidan : MonoBehaviour
             int modNum = i % endRoomLocations.allEndAllyLocations.Length;
             allAllies[i].SetEndDestination(endRoomLocations.allEndAllyLocations[modNum].position);
         }
+        FindObjectOfType<PETER_PlayerMovement>().GetComponent<NavMeshAgent>().areaMask = 10011;
 
         isDoorBroken = false;
     }
