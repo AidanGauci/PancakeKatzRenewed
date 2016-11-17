@@ -2,20 +2,25 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class GameManager_Aidan : MonoBehaviour {
+public class GameManager_Aidan : MonoBehaviour
+{
+
+    public bool startWithMouse;
 
     [HideInInspector]
+    public bool isFirstEnemyKilled = false;
+    [HideInInspector]
     public bool isDoorBroken = false;
+    [HideInInspector]
+    public bool isInGameScene = false;
     public static GameManager_Aidan instance = null;
 
-    EndRoomAllyLocations_Aidan endRoomLocations;
-    AllyAI_Aidan[] allAllies;
+    EndRoomAllyLocations_Aidan endRoomLocations = null;
+    AllyAI_Aidan[] allAllies = null;
+    bool hasInitializedVariables = false;
 
     void Awake()
     {
-        endRoomLocations = FindObjectOfType<EndRoomAllyLocations_Aidan>();
-        allAllies = FindObjectsOfType<AllyAI_Aidan>();
-
         if (instance == null)
         {
             instance = this;
@@ -30,29 +35,63 @@ public class GameManager_Aidan : MonoBehaviour {
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        // Cursor visibility code   ----------------------
+        Cursor.visible = startWithMouse;
+
+        if (Cursor.visible)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else if (!Cursor.visible)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        //  ----------------------------------------------
     }
 
     void Update()
     {
+
+        // Cursor visibility and Escape code    ----------
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Cursor.visible = !Cursor.visible;
+            if (Application.isEditor)
+            {
+                Cursor.visible = !Cursor.visible;
+            }
+            else
+            {
+                /// PAUSE MENU FUNCTION INSERT HERE
+            }
         }
 
         if (Cursor.visible)
         {
             Cursor.lockState = CursorLockMode.None;
         }
-        else
+        else if (!Cursor.visible)
         {
             Cursor.lockState = CursorLockMode.Locked;
         }
+        //  ----------------------------------------------
+
 
         if (isDoorBroken)
         {
             SetEndDestination();
+        }
+        if (isFirstEnemyKilled)
+        {      
+            allAllies = FindObjectsOfType<AllyAI_Aidan>();
+
+            int prng = Random.Range(0, 100);
+            for (int i = 0; i < allAllies.Length; i++)
+            {
+                allAllies[i].swordObtained = true;
+                allAllies[i].textChoicesSeed = prng;
+            }
+
+            isFirstEnemyKilled = false;
         }
     }
 
@@ -73,6 +112,7 @@ public class GameManager_Aidan : MonoBehaviour {
             int modNum = i % endRoomLocations.allEndAllyLocations.Length;
             allAllies[i].SetEndDestination(endRoomLocations.allEndAllyLocations[modNum].position);
         }
+        FindObjectOfType<PETER_PlayerMovement>().GetComponent<NavMeshAgent>().areaMask = 10011;
 
         isDoorBroken = false;
     }
@@ -82,6 +122,8 @@ public class GameManager_Aidan : MonoBehaviour {
         Cursor.visible = true;
         allAllies = null;
         endRoomLocations = null;
+        isInGameScene = false;
+        hasInitializedVariables = false;
         SceneManager.LoadScene("EndGameScene");
     }
 }
