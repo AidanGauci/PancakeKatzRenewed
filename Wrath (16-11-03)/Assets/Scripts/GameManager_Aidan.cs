@@ -17,6 +17,7 @@ public class GameManager_Aidan : MonoBehaviour
 
     EndRoomAllyLocations_Aidan endRoomLocations = null;
     AllyAI_Aidan[] allAllies = null;
+    PETER_PlayerMovement playerRef;
     bool hasInitializedVariables = false;
 
     void Awake()
@@ -51,7 +52,6 @@ public class GameManager_Aidan : MonoBehaviour
 
     void Update()
     {
-
         // Cursor visibility and Escape code    ----------
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -101,29 +101,26 @@ public class GameManager_Aidan : MonoBehaviour
         {
             endRoomLocations = FindObjectOfType<EndRoomAllyLocations_Aidan>();
         }
-
         if (allAllies == null)
         {
             allAllies = FindObjectsOfType<AllyAI_Aidan>();
         }
-
         for (int i = 0; i < allAllies.Length; i++)
         {
             int modNum = i % endRoomLocations.allEndAllyLocations.Length;
             allAllies[i].SetEndDestination(endRoomLocations.allEndAllyLocations[modNum].position);
         }
         FindObjectOfType<PETER_PlayerMovement>().GetComponent<NavMeshAgent>().areaMask = 10011;
-
         isDoorBroken = false;
     }
 
     public void HasHitEndBox()
     {
         Cursor.visible = true;
-        allAllies = null;
-        endRoomLocations = null;
-        isInGameScene = false;
-        hasInitializedVariables = false;
+        GameManager_Aidan.instance.allAllies = null;
+        GameManager_Aidan.instance.endRoomLocations = null;
+        GameManager_Aidan.instance.hasInitializedVariables = false;
+        GameManager_Aidan.instance.isInGameScene = false;
         SceneManager.LoadScene("EndGameScene");
     }
 }

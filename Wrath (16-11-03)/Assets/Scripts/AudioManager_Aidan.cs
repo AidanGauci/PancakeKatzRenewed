@@ -4,13 +4,18 @@ using System.Collections;
 public class AudioManager_Aidan : MonoBehaviour {
 
     public enum AudioChannel { Master, SFX, Music};
+    public AudioClip randPickaxe;
+    public float gapBetweenPickaxeMin;
+    public float gapBetweenPickaxeMax;
     public float masterVolumePercent = 1f;
     public float sfxVolumePercent = 1f;
     public float musicVolumePercent = 1f;
 
     public static AudioManager_Aidan instance = null;
 
+    Vector3 randomPickaxeLocation = Vector3.zero;
     int activeMusicSourceIndex;
+    float nextPickaxeNoise;
     bool activateRandomPick = false;
     AudioSource[] musicSources;
 
@@ -24,10 +29,29 @@ public class AudioManager_Aidan : MonoBehaviour {
             musicSources[i] = newMusicSource.AddComponent<AudioSource>();
             newMusicSource.transform.parent = transform;
         }
-
         masterVolumePercent = PlayerPrefs.GetFloat("masterVolume", masterVolumePercent);
         sfxVolumePercent = PlayerPrefs.GetFloat("sfxVolume", sfxVolumePercent);
         musicVolumePercent = PlayerPrefs.GetFloat("musicVolume", musicVolumePercent);
+    }
+
+    void Update()
+    {
+        if (GameManager_Aidan.instance.isInGameScene)
+        {
+            if (!activateRandomPick)
+            {
+                nextPickaxeNoise = Time.time + Random.Range(gapBetweenPickaxeMin, gapBetweenPickaxeMax);
+                activateRandomPick = true;
+            }
+            else
+            {
+                if (nextPickaxeNoise <= Time.time)
+                {
+                    PlaySound(randPickaxe, randomPickaxeLocation);
+                    activateRandomPick = false;
+                }
+            }
+        }
     }
 
     public void PlayMusic(AudioClip clip, float fadeDuration = 1)

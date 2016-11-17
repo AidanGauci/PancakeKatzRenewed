@@ -5,13 +5,14 @@ using UnityEngine.UI;
 
 public class GameScreenManager_Aidan : MonoBehaviour {
 
+    [HideInInspector]
+    public bool MainMenu = true;
     public RectTransform mainMenu;
     public RectTransform settingsMenu;
     public Toggle fullscreenToggle;
     public Slider[] volumeSliders;
     public Toggle[] resolutionToggles;
     public int[] screenWidths;
-    public bool MainMenu = true;
 
     int activeScreenResIndex = 0;
 
