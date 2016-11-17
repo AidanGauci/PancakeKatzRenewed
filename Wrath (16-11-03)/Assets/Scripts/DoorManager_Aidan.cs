@@ -33,7 +33,6 @@ public class DoorManager_Aidan : MonoBehaviour {
             if (allAlliesCollided)
             {
                 FindObjectOfType<GameManager_Aidan>().isDoorBroken = true;
-                playerRef.GetComponent<NavMeshAgent>().areaMask = 10011;
                 if (doorParticleEffect != null)
                 {
                     Destroy(Instantiate(doorParticleEffect, transform.position + (Vector3.up * effectOffset), Quaternion.Euler(new Vector3(0, -140, 180))), 2);

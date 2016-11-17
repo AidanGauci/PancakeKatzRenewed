@@ -13,6 +13,7 @@ public class TutorialWallTriggers_Aidan : MonoBehaviour
     public string toSayAfter;
 
     UIManager_Aidan UI;
+    bool hasSetPlayerNavMeshAgent = false;
 
     void Start()
     {
@@ -21,7 +22,11 @@ public class TutorialWallTriggers_Aidan : MonoBehaviour
 
     void Update()
     {
-        print(guardKilled);
+        if (!hasSetPlayerNavMeshAgent && firstAllyRef.hasTalkedToPlayer)
+        {
+            FindObjectOfType<PETER_PlayerMovement>().GetComponent<NavMeshAgent>().areaMask = 10001;
+            hasSetPlayerNavMeshAgent = true;
+        }
     }
 
     void OnTriggerEnter(Collider hit)
@@ -40,18 +45,16 @@ public class TutorialWallTriggers_Aidan : MonoBehaviour
             UI.swordText.gameObject.SetActive(true);
             UI.swordTextBackground.gameObject.SetActive(true);
         }
-        if (firstAllyRef.hasTalkedToPlayer)
+        if (firstAllyRef.hasTalkedToPlayer && hit.tag == "Player")
         {
-            FindObjectOfType<PETER_PlayerMovement>().GetComponent<NavMeshAgent>().areaMask = 10001;
             transform.position = newPos.position;
         }
     }
 
     void OnTriggerStay(Collider hit)
     {
-        if (firstAllyRef.hasTalkedToPlayer)
+        if (firstAllyRef.hasTalkedToPlayer && hit.tag == "Player")
         {
-            FindObjectOfType<PETER_PlayerMovement>().GetComponent<NavMeshAgent>().areaMask = 10001;
             transform.position = newPos.position;
         }
     }
