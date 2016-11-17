@@ -120,10 +120,10 @@ public class GameManager_Aidan : MonoBehaviour
     public void HasHitEndBox()
     {
         Cursor.visible = true;
-        allAllies = null;
-        endRoomLocations = null;
-        isInGameScene = false;
-        hasInitializedVariables = false;
+        GameManager_Aidan.instance.allAllies = null;
+        GameManager_Aidan.instance.endRoomLocations = null;
+        GameManager_Aidan.instance.hasInitializedVariables = false;
+        GameManager_Aidan.instance.isInGameScene = false;
         SceneManager.LoadScene("EndGameScene");
     }
 }
