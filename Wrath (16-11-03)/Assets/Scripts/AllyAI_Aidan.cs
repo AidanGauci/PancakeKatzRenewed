@@ -50,10 +50,13 @@ public class AllyAI_Aidan : MonoBehaviour {
     bool hasBeenTalkedTo = false;
     bool headingToEnd = false;
     bool atEnd = false;
+    bool isWalking = false;
+    bool isIdle = true;
 
     void Awake()
     {
         animator = GetComponentInChildren<Animator>();
+        animator.SetTrigger("Idle");
         currentStringIndex = 0;
         hasTalkedToPlayer = false;
         myCollider = GetComponent<CapsuleCollider>();
@@ -63,8 +66,17 @@ public class AllyAI_Aidan : MonoBehaviour {
 
     void Update()
     {
+        if (isWalking)
+        {
+            animator.SetTrigger("Walk");
+        }
+        else if (isIdle)
+        {
+            animator.SetTrigger("Idle");
+        }
+
         Vector3 directionToPlayer = (transform.position - playerT.transform.position) * -1f;
-        if (canPress && !hasBeenTalkedTo && swordObtained && Input.GetKeyDown(KeyCode.E))
+        if (canPress && !hasBeenTalkedTo && swordObtained && Input.GetKeyDown(KeyCode.E) && isIdle)
         {
             if (Physics.Raycast(transform.position, directionToPlayer, playerCheckDistance, playerLayerMask, QueryTriggerInteraction.Collide))
             {
@@ -82,11 +94,8 @@ public class AllyAI_Aidan : MonoBehaviour {
             transform.LookAt(playerT.transform);
         }
 
-        if (hasBeenTalkedTo)
+        if (hasBeenTalkedTo && isWalking)
         {
-            animator.SetBool("Idle", false);
-            animator.SetBool("Walk", true);
-
             if (currentFootstepTimer == 0)
             {
                 AudioManager_Aidan.instance.PlaySound(walkingSound, transform.position);
@@ -101,8 +110,8 @@ public class AllyAI_Aidan : MonoBehaviour {
             {
                 privateTimeForCollider = Time.time + waitTimeForCollider;
                 navigator.Stop();
-                animator.SetBool("Walk", false);
-                animator.SetBool("Idle", true);
+                isWalking = false;
+                isIdle = true;
                 hasBeenTalkedTo = false;
                 canPress = false;
             }
@@ -118,8 +127,6 @@ public class AllyAI_Aidan : MonoBehaviour {
 
         if (headingToEnd && effectWaitTime <= Time.time)
         {
-            animator.SetBool("Idle", false);
-            animator.SetBool("Walk", true);
             myCollider.enabled = true;
             navigator.enabled = true;
             GetComponent<Rigidbody>().freezeRotation = false;
@@ -127,9 +134,9 @@ public class AllyAI_Aidan : MonoBehaviour {
             if (CircleCircleCheck(transform.position, 1, navigator.destination, endCheckDistance))
             {
                 GetComponent<Rigidbody>().freezeRotation = true;
-                animator.SetBool("Walk", false);
-                animator.SetBool("Idle", true);
                 navigator.Stop();
+                isWalking = false;
+                isIdle = true;
                 headingToEnd = false;
             }
         }
@@ -155,6 +162,8 @@ public class AllyAI_Aidan : MonoBehaviour {
     void OnFinishTalking()
     {
         navigator.SetDestination(doorPos.position);
+        isIdle = false;
+        isWalking = true;
         canPress = true;
         talkedToAlly = false;
         hasBeenTalkedTo = true;
@@ -169,6 +178,8 @@ public class AllyAI_Aidan : MonoBehaviour {
         GetComponent<Rigidbody>().freezeRotation = false;
         navigator.SetDestination(position);
         navigator.Resume();
+        isIdle = false;
+        isWalking = true;
         headingToEnd = true;
         atEnd = true;
     }
