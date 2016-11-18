@@ -13,6 +13,9 @@ public class PickupSword_Aidan : MonoBehaviour
     public string toSayBeforeSword;
     public string toSayAfterSword;
 
+    public Transform pickaxe;
+    public Transform sword;
+
     PETER_PlayerAttack playerRef;
     TutorialWallTriggers_Aidan[] tutorialTriggers;
     UIManager_Aidan UI;
@@ -48,10 +51,6 @@ public class PickupSword_Aidan : MonoBehaviour
                     isSwordTaken = true;
                     UI.swordText.gameObject.SetActive(false);
                     UI.swordTextBackground.gameObject.SetActive(false);
-
-                    Transform Model = playerRef.transform.FindChild("Model");
-                    Transform pickaxe = Model.FindChild("PickaxeMesh");
-                    Transform sword = Model.FindChild("SwordMesh");
 
                     pickaxe.gameObject.SetActive(false);
                     sword.gameObject.SetActive(true);

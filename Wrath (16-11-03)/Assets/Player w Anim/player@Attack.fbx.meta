@@ -1,0 +1,165 @@
+fileFormatVersion: 2
+guid: 5ec83c954d2bdf949aead8cbfdf488eb
+timeCreated: 1479349496
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Head_JNT
+    100002: L_Ankle
+    100004: L_BicepRoll_JNT
+    100006: L_Clavicle
+    100008: L_Elbow
+    100010: L_Finger1_JNT
+    100012: L_Finger2_JNT
+    100014: L_FInger3_JNT
+    100016: L_Hip
+    100018: L_Knee
+    100020: L_Shoulder
+    100022: L_ThighRoll_JNT
+    100024: L_Thumb1_JNT
+    100026: L_Thumb2_JNT
+    100028: L_Thumb3_JNT
+    100030: L_Wrist
+    100032: Mesh
+    100034: Pelvis_JNT
+    100036: Pickaxe:polySurface5
+    100038: //RootNode
+    100040: R_Ankle
+    100042: R_BicepRoll_JNT
+    100044: R_Clavicle
+    100046: R_Elbow
+    100048: R_Finger1_JNT
+    100050: R_Finger2_JNT
+    100052: R_FInger3_JNT
+    100054: R_Hip
+    100056: R_Knee
+    100058: R_Shoulder
+    100060: R_ThighRoll_JNT
+    100062: R_Thumb1_JNT
+    100064: R_Thumb2_JNT
+    100066: R_Thumb3_JNT
+    100068: R_Wrist
+    100070: Root_CTRL
+    100072: Spine1_JNT
+    100074: Spine2_JNT
+    100076: Spine3_JNT
+    100078: Spine4_JNT
+    100080: Spine5_JNT
+    100082: sword_working:polySurface12
+    400000: Head_JNT
+    400002: L_Ankle
+    400004: L_BicepRoll_JNT
+    400006: L_Clavicle
+    400008: L_Elbow
+    400010: L_Finger1_JNT
+    400012: L_Finger2_JNT
+    400014: L_FInger3_JNT
+    400016: L_Hip
+    400018: L_Knee
+    400020: L_Shoulder
+    400022: L_ThighRoll_JNT
+    400024: L_Thumb1_JNT
+    400026: L_Thumb2_JNT
+    400028: L_Thumb3_JNT
+    400030: L_Wrist
+    400032: Mesh
+    400034: Pelvis_JNT
+    400036: Pickaxe:polySurface5
+    400038: //RootNode
+    400040: R_Ankle
+    400042: R_BicepRoll_JNT
+    400044: R_Clavicle
+    400046: R_Elbow
+    400048: R_Finger1_JNT
+    400050: R_Finger2_JNT
+    400052: R_FInger3_JNT
+    400054: R_Hip
+    400056: R_Knee
+    400058: R_Shoulder
+    400060: R_ThighRoll_JNT
+    400062: R_Thumb1_JNT
+    400064: R_Thumb2_JNT
+    400066: R_Thumb3_JNT
+    400068: R_Wrist
+    400070: Root_CTRL
+    400072: Spine1_JNT
+    400074: Spine2_JNT
+    400076: Spine3_JNT
+    400078: Spine4_JNT
+    400080: Spine5_JNT
+    400082: sword_working:polySurface12
+    2300000: Pickaxe:polySurface5
+    2300002: sword_working:polySurface12
+    3300000: Pickaxe:polySurface5
+    3300002: sword_working:polySurface12
+    4300000: Mesh
+    4300002: sword_working:polySurface12
+    4300004: Pickaxe:polySurface5
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Mesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
