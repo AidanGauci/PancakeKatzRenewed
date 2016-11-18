@@ -11,6 +11,8 @@ public class PETER_PlayerAttack : MonoBehaviour
     public float swingSpeed;
     public float attackTime;
 
+    public int playerHealth;
+
 
     // ENUM FOR ATTACK STATE
     public enum attackState
@@ -30,6 +32,7 @@ public class PETER_PlayerAttack : MonoBehaviour
 	void Start ()
     {
         hasWeapon = false;
+        playerHealth = 5;
         currState = attackState.notAttacking;
         timer = 0.0f;
 
