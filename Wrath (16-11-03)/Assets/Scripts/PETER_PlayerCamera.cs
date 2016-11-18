@@ -98,16 +98,6 @@ public class PETER_PlayerCamera : MonoBehaviour
                 }
             }
         }
-        
-
-
-        /// =-=-=-=-=-=
-        /// PROBABLY REDUNDENT WHEN ANIMATION IS IMPLEMENTED
-        /// =-=-=-=-=-=
-        // rotate Playe Model to face same direction as camera
-        Vector3 ModelRot = CamAim.position;
-        ModelRot.y = PlayerModel.position.y;
-        PlayerModel.LookAt(ModelRot);
 
     }
 

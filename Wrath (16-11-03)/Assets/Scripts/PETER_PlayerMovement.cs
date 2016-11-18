@@ -19,55 +19,41 @@ public class PETER_PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        Vector3 Angle = AnglePointer.position - this.transform.position;
-        Vector3 newPos = new Vector3(0, 0, 0);
 
-        if (Input.GetKey("w"))
+        if (GetComponent<PETER_PlayerAttack>().currState == PETER_PlayerAttack.attackState.notAttacking)
         {
-            newPos.x += Angle.x;
-            newPos.z += Angle.z;
-        }
+            Vector3 Angle = AnglePointer.position - this.transform.position;
+            Vector3 newPos = new Vector3(0, 0, 0);
 
-        if (Input.GetKey("a"))
-        {
-            newPos.x -= Angle.z;
-            newPos.z += Angle.x;
-        }
-
-        if (Input.GetKey("s"))
-        {
-            newPos.x -= Angle.x;
-            newPos.z -= Angle.z;
-        }
-
-        if (Input.GetKey("d"))
-        {
-            newPos.x += Angle.z;
-            newPos.z -= Angle.x;
-        }
-
-        newPos.Normalize();
-        newPos *= speed * 0.1f * Time.deltaTime;
-
-        agent.Move(newPos);
-
-
-
-        /*
-        if (Input.GetKey("g"))
-        {
-            GameObject[] doorBoulders = GameObject.FindGameObjectsWithTag("door");
-            foreach (GameObject removable in doorBoulders)
+            if (Input.GetKey("w"))
             {
-                removable.GetComponent<MeshRenderer>().enabled = false;
-                removable.GetComponent<ParticleSystem>().Play();
+                newPos.x += Angle.x;
+                newPos.z += Angle.z;
             }
-            agent.areaMask = 10011;
-            Debug.Log("'g' is pressed. Giving player access to all areas.");
+
+            if (Input.GetKey("a"))
+            {
+                newPos.x -= Angle.z;
+                newPos.z += Angle.x;
+            }
+
+            if (Input.GetKey("s"))
+            {
+                newPos.x -= Angle.x;
+                newPos.z -= Angle.z;
+            }
+
+            if (Input.GetKey("d"))
+            {
+                newPos.x += Angle.z;
+                newPos.z -= Angle.x;
+            }
+
+            newPos.Normalize();
+            newPos *= speed * 0.1f * Time.deltaTime;
+
+            agent.Move(newPos);
         }
-        */
-
-
 
     }
 
