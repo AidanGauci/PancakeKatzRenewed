@@ -3,8 +3,13 @@ using System.Collections;
 
 public class DoorManager_Aidan : MonoBehaviour {
 
+    public ParticleSystem wallParticleEffect;
     public ParticleSystem doorParticleEffect;
-    public float effectOffset = 1f;
+    public ParticleSystem massParticleEffect;
+    public Transform massParticleSpawn;
+    public Transform particleSpawn1;
+    public Transform particleSpawn2;
+    public Transform doorParticleSpawn;
     
     PETER_PlayerMovement playerRef;
     UIManager_Aidan UI;
@@ -35,8 +40,10 @@ public class DoorManager_Aidan : MonoBehaviour {
                 FindObjectOfType<GameManager_Aidan>().isDoorBroken = true;
                 if (doorParticleEffect != null)
                 {
-                    Destroy(Instantiate(doorParticleEffect, transform.position + (Vector3.up * effectOffset), Quaternion.Euler(new Vector3(0, -140, 180))), 2);
-                    Destroy(Instantiate(doorParticleEffect, transform.position, Quaternion.Euler(new Vector3(0, -140, 180))), 2);
+                    Destroy(Instantiate(wallParticleEffect, particleSpawn1.position, particleSpawn1.rotation), 2);
+                    Destroy(Instantiate(wallParticleEffect, particleSpawn2.position, particleSpawn2.rotation), 2);
+                    Destroy(Instantiate(massParticleEffect, massParticleSpawn.position, massParticleSpawn.rotation), 2);
+                    Destroy(Instantiate(doorParticleEffect, doorParticleSpawn.position, doorParticleSpawn.rotation), 2);
                 }
 
                 Destroy(gameObject);
