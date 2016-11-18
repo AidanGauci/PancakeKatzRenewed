@@ -14,22 +14,19 @@ public class EndGameScreen_Aidan : MonoBehaviour {
     float randOffset;
     float randJumpHeight;
     float currentLerpTime = 0;
-    float currentDelayTime;
+    float currentDelayTime = float.PositiveInfinity;
     Vector3 currentPosition;
     Vector3 jumpPosition;
 
     void Awake()
     {
         transform.LookAt(lookRef);
-    }
-
-    void Start()
-    {
         randOffset = Random.value;
         currentPosition = transform.position;
         randJumpHeight = Random.Range(jumpHeightMin, jumpHeightMax);
         jumpPosition = currentPosition + (Vector3.up * randJumpHeight);
-        currentDelayTime = Time.deltaTime + randOffset;
+        currentDelayTime = Time.time + randOffset;
+        print(currentDelayTime);
     }
 
     void Update()

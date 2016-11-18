@@ -43,7 +43,7 @@ public class JAKE_patrolscript : MonoBehaviour {
         Vector3 difference = gameObject.transform.position - targetPos;
 
         //When distance between this object and its destination is less than 0.1 and it has another place to get to...
-        if (difference.magnitude < 1f && position_queue.Count > 0)
+        if (difference.magnitude < 1.1f && position_queue.Count > 0)
         {
             targetPos = position_queue[0].position;             // Set new destination to the first position in queue
 
