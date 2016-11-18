@@ -1,28 +1,30 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SwordAttack_Aidan : MonoBehaviour {
+public class SwordAttack_Aidan : MonoBehaviour
+{
 
-    PETER_PlayerAttack playerAtt;
+    PETER_PlayerAttack player;
 
     void Start()
     {
-        playerAtt = FindObjectOfType<PETER_PlayerAttack>();
+        player = FindObjectOfType<PETER_PlayerAttack>();
     }
 
 	void OnTriggerEnter(Collider hit)
     {
-        if (hit.tag == "Enemy" && playerAtt.currState == PETER_PlayerAttack.attackState.midSwing)
+        if (hit.tag == "Enemy" && player.currState == PETER_PlayerAttack.attackState.midSwing)
         {
-            Destroy(hit.gameObject);
+            hit.GetComponent<PETER_EnemyAI>().Kill();
         }
     }
 
     void OnTriggerStay(Collider hit)
     {
-        if (hit.tag == "Enemy" && playerAtt.currState == PETER_PlayerAttack.attackState.midSwing)
+        if (hit.tag == "Enemy" && player.currState == PETER_PlayerAttack.attackState.midSwing)
         {
-            Destroy(hit.gameObject);
+            hit.GetComponent<PETER_EnemyAI>().Kill();
         }
     }
+
 }
