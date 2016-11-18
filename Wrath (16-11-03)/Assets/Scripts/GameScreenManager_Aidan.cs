@@ -47,7 +47,7 @@ public class GameScreenManager_Aidan : MonoBehaviour {
         Cursor.lockState = CursorLockMode.Locked;
         MainMenu = false;
         GameManager_Aidan.instance.isInGameScene = true;
-        SceneManager.LoadScene("aidan_working_scene");
+        SceneManager.LoadScene("chris_working_scene");
     }
 
     public void ExitGame()

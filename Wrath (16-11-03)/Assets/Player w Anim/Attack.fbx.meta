@@ -1,0 +1,214 @@
+fileFormatVersion: 2
+guid: e38dca472adacfc43b027250920826e7
+timeCreated: 1479432622
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: group
+    100004: group1
+    100006: Head_JNT
+    100008: Helmet:group
+    100010: Helmet:pasted__pCylinder3
+    100012: Helmet:pasted__pCylinder3 1
+    100014: Helmet:pCylinder1
+    100016: Helmet:pCylinder2
+    100018: Helmet:pCylinder3
+    100020: Helmet:pSphere1
+    100022: Helmet:pSphere2
+    100024: Helmet:pSphere3
+    100026: Helmet:pSphere4
+    100028: Helmet:pSphere5
+    100030: Helmet:transform1
+    100032: Helmet:transform2
+    100034: Helmet:transform3
+    100036: Helmet:transform4
+    100038: Helmet:transform5
+    100040: Helmet:transform6
+    100042: Helmet:transform7
+    100044: Helmet:transform8
+    100046: Helmet:transform9
+    100048: Horn1:pCube1
+    100050: Horn:pCube1
+    100052: L_Ankle
+    100054: L_BicepRoll_JNT
+    100056: L_Clavicle
+    100058: L_Elbow
+    100060: L_Finger1_JNT
+    100062: L_Finger2_JNT
+    100064: L_Hip
+    100066: L_Knee
+    100068: L_Shoulder
+    100070: L_ThighRoll_JNT
+    100072: L_Thumb1_JNT
+    100074: L_Thumb2_JNT
+    100076: L_Thumb3_JNT
+    100078: L_Wrist
+    100080: Mesh
+    100082: Pelvis_JNT
+    100084: R_Ankle
+    100086: R_BicepRoll_JNT
+    100088: R_Clavicle
+    100090: R_Elbow
+    100092: R_Finger1_JNT
+    100094: R_Finger2_JNT
+    100096: R_Hip
+    100098: R_Knee
+    100100: R_Shoulder
+    100102: R_ThighRoll_JNT
+    100104: R_Thumb1_JNT
+    100106: R_Thumb2_JNT
+    100108: R_Thumb3_JNT
+    100110: R_Wrist
+    100112: Root_CTRL
+    100114: Spine1_JNT
+    100116: Spine2_JNT
+    100118: Spine3_JNT
+    100120: Spine4_JNT
+    100122: Spine5_JNT
+    100124: sword_working:polySurface12
+    100126: transform1
+    100128: transform2
+    400000: //RootNode
+    400002: group
+    400004: group1
+    400006: Head_JNT
+    400008: Helmet:group
+    400010: Helmet:pasted__pCylinder3
+    400012: Helmet:pasted__pCylinder3 1
+    400014: Helmet:pCylinder1
+    400016: Helmet:pCylinder2
+    400018: Helmet:pCylinder3
+    400020: Helmet:pSphere1
+    400022: Helmet:pSphere2
+    400024: Helmet:pSphere3
+    400026: Helmet:pSphere4
+    400028: Helmet:pSphere5
+    400030: Helmet:transform1
+    400032: Helmet:transform2
+    400034: Helmet:transform3
+    400036: Helmet:transform4
+    400038: Helmet:transform5
+    400040: Helmet:transform6
+    400042: Helmet:transform7
+    400044: Helmet:transform8
+    400046: Helmet:transform9
+    400048: Horn1:pCube1
+    400050: Horn:pCube1
+    400052: L_Ankle
+    400054: L_BicepRoll_JNT
+    400056: L_Clavicle
+    400058: L_Elbow
+    400060: L_Finger1_JNT
+    400062: L_Finger2_JNT
+    400064: L_Hip
+    400066: L_Knee
+    400068: L_Shoulder
+    400070: L_ThighRoll_JNT
+    400072: L_Thumb1_JNT
+    400074: L_Thumb2_JNT
+    400076: L_Thumb3_JNT
+    400078: L_Wrist
+    400080: Mesh
+    400082: Pelvis_JNT
+    400084: R_Ankle
+    400086: R_BicepRoll_JNT
+    400088: R_Clavicle
+    400090: R_Elbow
+    400092: R_Finger1_JNT
+    400094: R_Finger2_JNT
+    400096: R_Hip
+    400098: R_Knee
+    400100: R_Shoulder
+    400102: R_ThighRoll_JNT
+    400104: R_Thumb1_JNT
+    400106: R_Thumb2_JNT
+    400108: R_Thumb3_JNT
+    400110: R_Wrist
+    400112: Root_CTRL
+    400114: Spine1_JNT
+    400116: Spine2_JNT
+    400118: Spine3_JNT
+    400120: Spine4_JNT
+    400122: Spine5_JNT
+    400124: sword_working:polySurface12
+    400126: transform1
+    400128: transform2
+    2300000: group1
+    2300002: Helmet:pasted__pCylinder3 1
+    2300004: sword_working:polySurface12
+    3300000: group1
+    3300002: Helmet:pasted__pCylinder3 1
+    3300004: sword_working:polySurface12
+    4300000: Mesh
+    4300002: Helmet:pasted__pCylinder3
+    4300004: group1
+    4300006: sword_working:polySurface12
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Mesh
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
