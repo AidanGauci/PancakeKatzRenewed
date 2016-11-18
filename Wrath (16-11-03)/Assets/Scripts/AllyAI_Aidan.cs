@@ -40,6 +40,7 @@ public class AllyAI_Aidan : MonoBehaviour {
     Transform mainCamera;
     UIManager_Aidan UI;
     CapsuleCollider myCollider;
+    Animator animator;
     float endWaitTime = float.PositiveInfinity;
     float privateTimeForCollider = float.PositiveInfinity;
     float effectWaitTime = float.PositiveInfinity;
@@ -52,6 +53,7 @@ public class AllyAI_Aidan : MonoBehaviour {
 
     void Awake()
     {
+        animator = GetComponentInChildren<Animator>();
         currentStringIndex = 0;
         hasTalkedToPlayer = false;
         myCollider = GetComponent<CapsuleCollider>();
@@ -82,6 +84,9 @@ public class AllyAI_Aidan : MonoBehaviour {
 
         if (hasBeenTalkedTo)
         {
+            animator.SetBool("Idle", false);
+            animator.SetBool("Walk", true);
+
             if (currentFootstepTimer == 0)
             {
                 AudioManager_Aidan.instance.PlaySound(walkingSound, transform.position);
@@ -96,6 +101,8 @@ public class AllyAI_Aidan : MonoBehaviour {
             {
                 privateTimeForCollider = Time.time + waitTimeForCollider;
                 navigator.Stop();
+                animator.SetBool("Walk", false);
+                animator.SetBool("Idle", true);
                 hasBeenTalkedTo = false;
                 canPress = false;
             }
@@ -111,7 +118,8 @@ public class AllyAI_Aidan : MonoBehaviour {
 
         if (headingToEnd && effectWaitTime <= Time.time)
         {
-
+            animator.SetBool("Idle", false);
+            animator.SetBool("Walk", true);
             myCollider.enabled = true;
             navigator.enabled = true;
             GetComponent<Rigidbody>().freezeRotation = false;
@@ -119,6 +127,8 @@ public class AllyAI_Aidan : MonoBehaviour {
             if (CircleCircleCheck(transform.position, 1, navigator.destination, endCheckDistance))
             {
                 GetComponent<Rigidbody>().freezeRotation = true;
+                animator.SetBool("Walk", false);
+                animator.SetBool("Idle", true);
                 navigator.Stop();
                 headingToEnd = false;
             }

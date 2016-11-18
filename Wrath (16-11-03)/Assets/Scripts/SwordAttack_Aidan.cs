@@ -13,7 +13,7 @@ public class SwordAttack_Aidan : MonoBehaviour
 
 	void OnTriggerEnter(Collider hit)
     {
-        if (hit.tag == "Enemy" && player.currState == PETER_PlayerAttack.attackState.midSwing)
+        if (hit.tag == "Enemy"/* && player.currState == PETER_PlayerAttack.attackState.midSwing*/)
         {
             hit.GetComponent<PETER_EnemyAI>().Kill();
         }
@@ -21,7 +21,7 @@ public class SwordAttack_Aidan : MonoBehaviour
 
     void OnTriggerStay(Collider hit)
     {
-        if (hit.tag == "Enemy" && player.currState == PETER_PlayerAttack.attackState.midSwing)
+        if (hit.tag == "Enemy"/* && player.currState == PETER_PlayerAttack.attackState.midSwing*/)
         {
             hit.GetComponent<PETER_EnemyAI>().Kill();
         }
