@@ -5,15 +5,21 @@ public class PETER_PlayerMovement : MonoBehaviour
 {
 
     public Transform AnglePointer;
+
     NavMeshAgent agent;
     public float speed;
+
+    public Vector3 newPos;
+
+    Animator playerModel;
 
 
 	// Use this for initialization
 	void Start ()
     {
         agent = GetComponent<NavMeshAgent>();
-	}
+        playerModel = GetComponent<PETER_PlayerAnimationController>().PlayerModel;
+    }
 	
 
 	// Update is called once per frame
@@ -22,8 +28,9 @@ public class PETER_PlayerMovement : MonoBehaviour
 
         if (GetComponent<PETER_PlayerAttack>().currState == PETER_PlayerAttack.attackState.notAttacking)
         {
+
             Vector3 Angle = AnglePointer.position - this.transform.position;
-            Vector3 newPos = new Vector3(0, 0, 0);
+            newPos = new Vector3(0, 0, 0);
 
             if (Input.GetKey("w"))
             {
@@ -49,10 +56,23 @@ public class PETER_PlayerMovement : MonoBehaviour
                 newPos.z -= Angle.x;
             }
 
-            newPos.Normalize();
-            newPos *= speed * 0.1f * Time.deltaTime;
+            if (newPos != new Vector3(0, 0, 0))
+            {
+                newPos.Normalize();
+                newPos *= speed * 0.1f * Time.deltaTime;
 
-            agent.Move(newPos);
+                agent.Move(newPos);
+
+                newPos *= 100000;
+                newPos.y = playerModel.transform.position.y;
+                playerModel.transform.LookAt(playerModel.transform.position + newPos);
+                GetComponent<PETER_PlayerAnimationController>().PlayWalk();
+            }
+            else
+            {
+                GetComponent<PETER_PlayerAnimationController>().PlayIdle();
+            }
+            
         }
 
     }

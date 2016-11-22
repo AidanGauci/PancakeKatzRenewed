@@ -4,31 +4,39 @@ using System.Collections;
 public class PETER_PlayerAnimationController : MonoBehaviour
 {
     
-    public Transform PlayerModel;
+    public Animator PlayerModel;
 
     // Use this for initialization
     void Start ()
     {
-	
-	}
+        PlayIdle();
+    }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (GetComponent<PETER_PlayerAttack>().currState == PETER_PlayerAttack.attackState.notAttacking)
-        {
+    }
 
-        }
+    public void PlayIdle()
+    {
+        PlayerModel.SetTrigger("Idle");
+        PlayerModel.ResetTrigger("Attack");
+        PlayerModel.ResetTrigger("Walk");
+    }
 
-        // If player is attacking, rotate Player Model to face same direction as camera
-        else
-        {
-            Vector3 ModelRot = GetComponent<PETER_PlayerCamera>().CamAim.position;
-            ModelRot.y = PlayerModel.position.y;
-            PlayerModel.LookAt(ModelRot);
-        }
+    public void PlayAttack()
+    {
+        PlayerModel.ResetTrigger("Idle");
+        PlayerModel.SetTrigger("Attack");
+        PlayerModel.ResetTrigger("Walk");
+    }
 
+    public void PlayWalk()
+    {
+        PlayerModel.ResetTrigger("Idle");
+        PlayerModel.ResetTrigger("Attack");
+        PlayerModel.SetTrigger("Walk");
     }
 
 }

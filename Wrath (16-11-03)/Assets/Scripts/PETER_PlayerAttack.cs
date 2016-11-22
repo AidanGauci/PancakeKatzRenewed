@@ -5,13 +5,14 @@ public class PETER_PlayerAttack : MonoBehaviour
 {
 
     public Transform Weapon;
-    public Transform WeaponPointerIdle;
-    public Transform WeaponPointerSwing;
-    public bool hasWeapon;
-    public float swingSpeed;
-    public float attackTime;
+    public AnimationClip AttackAnim;
+    public float beginSwingTime;
+    public float endSwingTime;
 
+    float attackLength;
+    public bool hasWeapon;
     public int playerHealth;
+    Animator playerModel;
 
 
     // ENUM FOR ATTACK STATE
@@ -31,13 +32,14 @@ public class PETER_PlayerAttack : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        beginSwingTime = Mathf.Clamp(beginSwingTime, 0, attackLength);
+        endSwingTime = Mathf.Clamp(endSwingTime, 0, attackLength - beginSwingTime);
+        attackLength = AttackAnim.length;
         hasWeapon = false;
         playerHealth = 5;
+        playerModel = GetComponent<PETER_PlayerAnimationController>().PlayerModel;
         currState = attackState.notAttacking;
         timer = 0.0f;
-
-        Weapon.position = WeaponPointerIdle.position;
-        ///Weapon.rotation = WeaponPointer.rotation;
     }
 
 
@@ -51,57 +53,52 @@ public class PETER_PlayerAttack : MonoBehaviour
         // NOT ATTACKING STATE
         if (currState == attackState.notAttacking)
         {
-            Weapon.position = WeaponPointerIdle.position;
             if (hasWeapon && Input.GetMouseButtonDown(0))
             {
                 currState = attackState.beginSwing;
                 timer = 0.0f;
+                GetComponent<PETER_PlayerAnimationController>().PlayAttack();
             }
         }
         
         // BEGIN SWING STATE
         else if (currState == attackState.beginSwing)
         {
-            timer += Time.deltaTime * swingSpeed;
-            Weapon.position = Vector3.Lerp(WeaponPointerIdle.position, WeaponPointerSwing.position, timer);
-            ///Weapon.rotation = Quaternion.Lerp(WeaponPointer.rotation, AnglePointer.rotation, timer);
-            if (timer >= 1)
+            timer += Time.deltaTime * playerModel.speed * 2;
+            if (timer >= beginSwingTime)
             {
-                Weapon.position = WeaponPointerSwing.position;
-                ///Weapon.rotation = AnglePointer.rotation;
                 currState = attackState.midSwing;
-                timer = 0.0f;
             }
         }
         
         // MID SWING STATE
         else if (currState == attackState.midSwing)
         {
-            timer += Time.deltaTime * attackTime;
-            Weapon.position = WeaponPointerSwing.position;
-            if (timer >= 1)
+            timer += Time.deltaTime * playerModel.speed * 2;
+            if (timer >= attackLength - endSwingTime)
             {
                 currState = attackState.endSwing;
-                timer = 0.0f;
             }
         }
         
         // END SWING STATE
         else if (currState == attackState.endSwing)
         {
-            timer += Time.deltaTime * swingSpeed;
-            Weapon.position = Vector3.Lerp(WeaponPointerSwing.position, WeaponPointerIdle.position, timer);
-            ///Weapon.rotation = Quaternion.Lerp(AnglePointer.rotation, WeaponPointer.rotation, timer);
-            if (timer >= 1)
+            timer += Time.deltaTime * playerModel.speed * 2;
+            if (timer >= attackLength)
             {
-                Weapon.position = WeaponPointerIdle.position;
-                ///Weapon.rotation = WeaponPointer.rotation;
                 currState = attackState.notAttacking;
-                timer = 0.0f;
             }
         }
 
 
+        if (currState != attackState.notAttacking)
+        {
+            Vector3 ModelRot = GetComponent<PETER_PlayerCamera>().CamAim.position;
+            ModelRot.y = playerModel.transform.position.y;
+            playerModel.transform.LookAt(ModelRot);
+        }
+        
     }
 
 }

@@ -4,7 +4,6 @@ using System.Collections;
 public class PETER_PlayerCamera : MonoBehaviour
 {
 
-    public Transform PlayerModel;
     public Transform CamX;
     public Transform CamY;
     public Transform CamAim;
@@ -20,6 +19,10 @@ public class PETER_PlayerCamera : MonoBehaviour
     public float camMoveLimit;  // Maximum amount the camera can move in a frame
     public float camVertLimit;  // Angle from the top and bottom past which the camera cannot move
 
+    Animator playerModel;
+
+
+
 	// Use this for initialization
 	void Start ()
     {
@@ -29,6 +32,7 @@ public class PETER_PlayerCamera : MonoBehaviour
         mouseSens = Mathf.Clamp(mouseSens, 0, 1000);
         camVertLimit = Mathf.Clamp(camVertLimit, 0, 89);
         camMoveLimit = Mathf.Clamp(camMoveLimit, 0, 150);
+        playerModel = GetComponent<PETER_PlayerAnimationController>().PlayerModel;
     }
 	
 	// Update is called once per frame
@@ -89,7 +93,7 @@ public class PETER_PlayerCamera : MonoBehaviour
         {
             if (camRayHits[i].transform.tag == "enviroCamCollider")
             {
-                Vector3 playerHitDir = camRayHits[i].point - PlayerModel.position;
+                Vector3 playerHitDir = camRayHits[i].point - playerModel.transform.position;
                 if (Vector3.Dot(playerHitDir.normalized, CamMain.transform.forward) < 0)
                 {
                     CamMain.transform.position = camRayHits[i].point;
