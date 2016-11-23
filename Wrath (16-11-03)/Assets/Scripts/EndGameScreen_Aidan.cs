@@ -26,7 +26,6 @@ public class EndGameScreen_Aidan : MonoBehaviour {
         randJumpHeight = Random.Range(jumpHeightMin, jumpHeightMax);
         jumpPosition = currentPosition + (Vector3.up * randJumpHeight);
         currentDelayTime = Time.time + randOffset;
-        print(currentDelayTime);
     }
 
     void Update()
