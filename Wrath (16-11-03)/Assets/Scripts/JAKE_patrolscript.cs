@@ -21,8 +21,9 @@ public class JAKE_patrolscript : MonoBehaviour {
         {
             position_queue.Add(tfm);
         }
-
+        
         targetPos = patrol_positions[0].position;                 // Set new destination to first position in queue
+        
 
         if (repeatPath)
         {
