@@ -34,7 +34,7 @@ public class MusicManager_Aidan : MonoBehaviour {
         {
             clipToPlay = menuTheme;
         }
-        else if (sceneName == "aidan_working_scene")
+        else if (sceneName == "peter_working_scene")
         {
             clipToPlay = ambientTheme;
         }
