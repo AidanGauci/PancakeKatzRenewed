@@ -4,7 +4,7 @@ using System.Collections;
 public class PETER_EnemyAI : MonoBehaviour
 {
 
-    PETER_PlayerCamera player;
+    PETER_PlayerAttack player;
     public Transform EnemyWeapon;
     public float SightDegrees;
     public float SightDistance;
@@ -17,6 +17,7 @@ public class PETER_EnemyAI : MonoBehaviour
 
     public enum enemyState
     {
+        asleep,
         idle,
         canSeePlayer,
         nextToPlayer,
@@ -30,20 +31,24 @@ public class PETER_EnemyAI : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-	    player = FindObjectOfType<PETER_PlayerCamera>();
+	    player = FindObjectOfType<PETER_PlayerAttack>();
         EnemyWeapon.gameObject.SetActive(false);
         SightDegrees = Mathf.Clamp(SightDegrees, 0, 360);
         SightDistance = Mathf.Clamp(SightDistance, GetComponent<NavMeshAgent>().radius, 10000);
         AttackDistance = Mathf.Clamp(AttackDistance, GetComponent<NavMeshAgent>().radius, SightDistance);
         timer = 0;
         spawnPos = transform.position;
-        currState = enemyState.idle;
+        currState = enemyState.asleep;
     }
 	
 
 	// Update is called once per frame
 	void Update ()
     {
+        if (currState == enemyState.asleep && player.hasWeapon == true)
+        {
+            currState = enemyState.idle;
+        }
         
         // Actions if currState is attacking
         if (currState == enemyState.attacking)
@@ -130,10 +135,30 @@ public class PETER_EnemyAI : MonoBehaviour
     {
 
     }
-    
+
+    //void PlayIdle()
+    //{
+    //    PlayerModel.SetTrigger("Idle");
+    //    PlayerModel.ResetTrigger("Attack");
+    //    PlayerModel.ResetTrigger("Walk");
+    //}
+    //
+    //void PlayAttack()
+    //{
+    //    PlayerModel.ResetTrigger("Idle");
+    //    PlayerModel.SetTrigger("Attack");
+    //    PlayerModel.ResetTrigger("Walk");
+    //}
+    //
+    //void PlayWalk()
+    //{
+    //    PlayerModel.ResetTrigger("Idle");
+    //    PlayerModel.ResetTrigger("Attack");
+    //    PlayerModel.SetTrigger("Walk");
+    //}
 
     // Kill is called when the player hits the enemy with an attack
-    public void Kill ()
+    public void Kill()
     {
         Destroy(this.gameObject);
     }
