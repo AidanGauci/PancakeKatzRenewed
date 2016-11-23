@@ -4,11 +4,7 @@ using System.Collections;
 public class PETER_EnemyAI : MonoBehaviour
 {
 
-<<<<<<< HEAD
     public PETER_PlayerAttack player;
-=======
-    PETER_PlayerAttack player;
->>>>>>> c6a016b277cccb6e2a789c2427d103fd4296118c
     public Transform EnemyWeapon;
     public float SightDegrees;
     public float SightDistance;
@@ -36,10 +32,6 @@ public class PETER_EnemyAI : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-<<<<<<< HEAD
-=======
-	    player = FindObjectOfType<PETER_PlayerAttack>();
->>>>>>> c6a016b277cccb6e2a789c2427d103fd4296118c
         EnemyWeapon.gameObject.SetActive(false);
         SightDegrees = Mathf.Clamp(SightDegrees, 0, 360);
         SightDistance = Mathf.Clamp(SightDistance, GetComponent<NavMeshAgent>().radius, 10000);
@@ -54,7 +46,6 @@ public class PETER_EnemyAI : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-<<<<<<< HEAD
 
         // Actions if currState is asleep
         if (currState == enemyState.asleep)
@@ -63,11 +54,6 @@ public class PETER_EnemyAI : MonoBehaviour
             {
                 currState = enemyState.idle;
             }
-=======
-        if (currState == enemyState.asleep && player.hasWeapon == true)
-        {
-            currState = enemyState.idle;
->>>>>>> c6a016b277cccb6e2a789c2427d103fd4296118c
         }
         
         // Actions if currState is attacking
@@ -157,7 +143,6 @@ public class PETER_EnemyAI : MonoBehaviour
 
     }
 
-<<<<<<< HEAD
     void PlayIdle()
     {
         selfAnimator.SetTrigger("Idle");
@@ -178,28 +163,6 @@ public class PETER_EnemyAI : MonoBehaviour
         selfAnimator.ResetTrigger("Attack");
         selfAnimator.SetTrigger("Walk");
     }
-=======
-    //void PlayIdle()
-    //{
-    //    PlayerModel.SetTrigger("Idle");
-    //    PlayerModel.ResetTrigger("Attack");
-    //    PlayerModel.ResetTrigger("Walk");
-    //}
-    //
-    //void PlayAttack()
-    //{
-    //    PlayerModel.ResetTrigger("Idle");
-    //    PlayerModel.SetTrigger("Attack");
-    //    PlayerModel.ResetTrigger("Walk");
-    //}
-    //
-    //void PlayWalk()
-    //{
-    //    PlayerModel.ResetTrigger("Idle");
-    //    PlayerModel.ResetTrigger("Attack");
-    //    PlayerModel.SetTrigger("Walk");
-    //}
->>>>>>> c6a016b277cccb6e2a789c2427d103fd4296118c
 
     // Kill is called when the player hits the enemy with an attack
     public void Kill()
