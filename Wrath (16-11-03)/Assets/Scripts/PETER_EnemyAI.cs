@@ -4,7 +4,7 @@ using System.Collections;
 public class PETER_EnemyAI : MonoBehaviour
 {
 
-    PETER_PlayerCamera player;
+    public PETER_PlayerAttack player;
     public Transform EnemyWeapon;
     public float SightDegrees;
     public float SightDistance;
@@ -12,11 +12,13 @@ public class PETER_EnemyAI : MonoBehaviour
     public float AttackTime;
     public bool TurnToAttack;
 
+    Animator selfAnimator;
     float timer;
     Vector3 spawnPos;
 
     public enum enemyState
     {
+        asleep,
         idle,
         canSeePlayer,
         nextToPlayer,
@@ -30,23 +32,32 @@ public class PETER_EnemyAI : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-	    player = FindObjectOfType<PETER_PlayerCamera>();
         EnemyWeapon.gameObject.SetActive(false);
         SightDegrees = Mathf.Clamp(SightDegrees, 0, 360);
         SightDistance = Mathf.Clamp(SightDistance, GetComponent<NavMeshAgent>().radius, 10000);
         AttackDistance = Mathf.Clamp(AttackDistance, GetComponent<NavMeshAgent>().radius, SightDistance);
+        selfAnimator = GetComponentInChildren<Animator>();
         timer = 0;
         spawnPos = transform.position;
-        currState = enemyState.idle;
+        currState = enemyState.asleep;
     }
 	
 
 	// Update is called once per frame
 	void Update ()
     {
+
+        // Actions if currState is asleep
+        if (currState == enemyState.asleep)
+        {
+            if (player.hasWeapon == true)
+            {
+                currState = enemyState.idle;
+            }
+        }
         
         // Actions if currState is attacking
-        if (currState == enemyState.attacking)
+        else if (currState == enemyState.attacking)
         {
             Vector3 scale = EnemyWeapon.transform.localScale;
             
@@ -72,8 +83,8 @@ public class PETER_EnemyAI : MonoBehaviour
         }
 
 
-        // If the enemy isn't attacking, Determine if enemy is next to player or can see player and set currState accordingly
-        if (currState != enemyState.attacking)
+        // If the enemy isn't attacking or asleep, Determine if enemy is next to player or can see player and set currState accordingly
+        else
         {
             if (CircleCircleCheck(transform.position, AttackDistance, player.transform.position, player.GetComponent<NavMeshAgent>().radius))
             {
@@ -103,6 +114,7 @@ public class PETER_EnemyAI : MonoBehaviour
         {
             GetComponent<NavMeshAgent>().SetDestination(spawnPos);
             GetComponent<NavMeshAgent>().Resume();
+            PlayIdle();
         }
 
         // Actions if currState is canSeePlayer
@@ -110,6 +122,7 @@ public class PETER_EnemyAI : MonoBehaviour
         {
             GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
             GetComponent<NavMeshAgent>().Resume();
+            PlayWalk();
         }
 
         // Actions if currState is nextToPlayer
@@ -117,8 +130,7 @@ public class PETER_EnemyAI : MonoBehaviour
         {
             GetComponent<NavMeshAgent>().Stop();
             currState = enemyState.attacking;
-            EnemyWeapon.gameObject.SetActive(true);
-
+            PlayAttack();
             Attack();
         }
 
@@ -130,10 +142,30 @@ public class PETER_EnemyAI : MonoBehaviour
     {
 
     }
+
+    void PlayIdle()
+    {
+        selfAnimator.SetTrigger("Idle");
+        selfAnimator.ResetTrigger("Attack");
+        selfAnimator.ResetTrigger("Walk");
+    }
     
+    void PlayAttack()
+    {
+        selfAnimator.ResetTrigger("Idle");
+        selfAnimator.SetTrigger("Attack");
+        selfAnimator.ResetTrigger("Walk");
+    }
+    
+    void PlayWalk()
+    {
+        selfAnimator.ResetTrigger("Idle");
+        selfAnimator.ResetTrigger("Attack");
+        selfAnimator.SetTrigger("Walk");
+    }
 
     // Kill is called when the player hits the enemy with an attack
-    public void Kill ()
+    public void Kill()
     {
         Destroy(this.gameObject);
     }
