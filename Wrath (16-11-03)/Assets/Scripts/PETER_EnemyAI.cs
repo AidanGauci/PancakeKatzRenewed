@@ -4,14 +4,15 @@ using System.Collections;
 public class PETER_EnemyAI : MonoBehaviour
 {
 
-    PETER_PlayerAttack player;
-    public Transform EnemyWeapon;
+    public PETER_PlayerAttack player;
     public float SightDegrees;
     public float SightDistance;
     public float AttackDistance;
-    public float AttackTime;
+    public float AttackEndDelay;
     public bool TurnToAttack;
 
+    float AttackTime;
+    Animator selfAnimator;
     float timer;
     Vector3 spawnPos;
 
@@ -31,36 +32,37 @@ public class PETER_EnemyAI : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-	    player = FindObjectOfType<PETER_PlayerAttack>();
-        EnemyWeapon.gameObject.SetActive(false);
         SightDegrees = Mathf.Clamp(SightDegrees, 0, 360);
         SightDistance = Mathf.Clamp(SightDistance, GetComponent<NavMeshAgent>().radius, 10000);
         AttackDistance = Mathf.Clamp(AttackDistance, GetComponent<NavMeshAgent>().radius, SightDistance);
+        selfAnimator = GetComponentInChildren<Animator>();
         timer = 0;
         spawnPos = transform.position;
         currState = enemyState.asleep;
+        PlayIdle();
+        AttackTime = player.attackLength;
     }
 	
 
 	// Update is called once per frame
 	void Update ()
     {
-        if (currState == enemyState.asleep && player.hasWeapon == true)
+
+        // Actions if currState is asleep
+        if (currState == enemyState.asleep)
         {
-            currState = enemyState.idle;
+            if (player.hasWeapon == true)
+            {
+                currState = enemyState.idle;
+            }
         }
         
         // Actions if currState is attacking
-        if (currState == enemyState.attacking)
+        else if (currState == enemyState.attacking)
         {
-            Vector3 scale = EnemyWeapon.transform.localScale;
-            
-            timer += Time.deltaTime;
-            if (timer >= AttackTime)
+            timer += Time.deltaTime * player.playerModel.speed * 2;
+            if (timer >= AttackTime + AttackEndDelay)
             {
-                scale.z = 7;
-                EnemyWeapon.transform.localScale = scale;
-                EnemyWeapon.gameObject.SetActive(false);
                 currState = enemyState.idle;
                 timer = 0;
             }
@@ -71,14 +73,11 @@ public class PETER_EnemyAI : MonoBehaviour
                 AttackRot.y = transform.position.y;
                 transform.LookAt(AttackRot);
             }
-
-            scale.z = Mathf.Lerp(scale.z, 20, 0.1f);
-            EnemyWeapon.transform.localScale = scale;
         }
 
 
-        // If the enemy isn't attacking, Determine if enemy is next to player or can see player and set currState accordingly
-        if (currState != enemyState.attacking)
+        // If the enemy isn't attacking or asleep, Determine if enemy is next to player or can see player and set currState accordingly
+        else
         {
             if (CircleCircleCheck(transform.position, AttackDistance, player.transform.position, player.GetComponent<NavMeshAgent>().radius))
             {
@@ -108,6 +107,7 @@ public class PETER_EnemyAI : MonoBehaviour
         {
             GetComponent<NavMeshAgent>().SetDestination(spawnPos);
             GetComponent<NavMeshAgent>().Resume();
+            PlayIdle();
         }
 
         // Actions if currState is canSeePlayer
@@ -115,6 +115,7 @@ public class PETER_EnemyAI : MonoBehaviour
         {
             GetComponent<NavMeshAgent>().SetDestination(player.transform.position);
             GetComponent<NavMeshAgent>().Resume();
+            PlayWalk();
         }
 
         // Actions if currState is nextToPlayer
@@ -122,40 +123,31 @@ public class PETER_EnemyAI : MonoBehaviour
         {
             GetComponent<NavMeshAgent>().Stop();
             currState = enemyState.attacking;
-            EnemyWeapon.gameObject.SetActive(true);
-
-            Attack();
+            PlayAttack();
         }
 
     }
 
-
-    // Attack 
-    void Attack ()
+    void PlayIdle()
     {
-
+        selfAnimator.SetTrigger("Idle");
+        selfAnimator.ResetTrigger("Attack");
+        selfAnimator.ResetTrigger("Walk");
     }
-
-    //void PlayIdle()
-    //{
-    //    PlayerModel.SetTrigger("Idle");
-    //    PlayerModel.ResetTrigger("Attack");
-    //    PlayerModel.ResetTrigger("Walk");
-    //}
-    //
-    //void PlayAttack()
-    //{
-    //    PlayerModel.ResetTrigger("Idle");
-    //    PlayerModel.SetTrigger("Attack");
-    //    PlayerModel.ResetTrigger("Walk");
-    //}
-    //
-    //void PlayWalk()
-    //{
-    //    PlayerModel.ResetTrigger("Idle");
-    //    PlayerModel.ResetTrigger("Attack");
-    //    PlayerModel.SetTrigger("Walk");
-    //}
+    
+    void PlayAttack()
+    {
+        selfAnimator.ResetTrigger("Idle");
+        selfAnimator.SetTrigger("Attack");
+        selfAnimator.ResetTrigger("Walk");
+    }
+    
+    void PlayWalk()
+    {
+        selfAnimator.ResetTrigger("Idle");
+        selfAnimator.ResetTrigger("Attack");
+        selfAnimator.SetTrigger("Walk");
+    }
 
     // Kill is called when the player hits the enemy with an attack
     public void Kill()

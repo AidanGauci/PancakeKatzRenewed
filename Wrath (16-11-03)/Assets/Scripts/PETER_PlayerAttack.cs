@@ -9,10 +9,10 @@ public class PETER_PlayerAttack : MonoBehaviour
     public float beginSwingTime;
     public float endSwingTime;
 
-    float attackLength;
+    public float attackLength;
     public bool hasWeapon;
     public int playerHealth;
-    Animator playerModel;
+    public Animator playerModel;
 
 
     // ENUM FOR ATTACK STATE
