@@ -5,13 +5,13 @@ public class PETER_EnemyAI : MonoBehaviour
 {
 
     public PETER_PlayerAttack player;
-    public Transform EnemyWeapon;
     public float SightDegrees;
     public float SightDistance;
     public float AttackDistance;
-    public float AttackTime;
+    public float AttackEndDelay;
     public bool TurnToAttack;
 
+    float AttackTime;
     Animator selfAnimator;
     float timer;
     Vector3 spawnPos;
@@ -32,7 +32,6 @@ public class PETER_EnemyAI : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
-        EnemyWeapon.gameObject.SetActive(false);
         SightDegrees = Mathf.Clamp(SightDegrees, 0, 360);
         SightDistance = Mathf.Clamp(SightDistance, GetComponent<NavMeshAgent>().radius, 10000);
         AttackDistance = Mathf.Clamp(AttackDistance, GetComponent<NavMeshAgent>().radius, SightDistance);
@@ -40,6 +39,8 @@ public class PETER_EnemyAI : MonoBehaviour
         timer = 0;
         spawnPos = transform.position;
         currState = enemyState.asleep;
+        PlayIdle();
+        AttackTime = player.attackLength;
     }
 	
 
@@ -59,14 +60,9 @@ public class PETER_EnemyAI : MonoBehaviour
         // Actions if currState is attacking
         else if (currState == enemyState.attacking)
         {
-            Vector3 scale = EnemyWeapon.transform.localScale;
-            
-            timer += Time.deltaTime;
-            if (timer >= AttackTime)
+            timer += Time.deltaTime * player.playerModel.speed * 2;
+            if (timer >= AttackTime + AttackEndDelay)
             {
-                scale.z = 7;
-                EnemyWeapon.transform.localScale = scale;
-                EnemyWeapon.gameObject.SetActive(false);
                 currState = enemyState.idle;
                 timer = 0;
             }
@@ -77,9 +73,6 @@ public class PETER_EnemyAI : MonoBehaviour
                 AttackRot.y = transform.position.y;
                 transform.LookAt(AttackRot);
             }
-
-            scale.z = Mathf.Lerp(scale.z, 20, 0.1f);
-            EnemyWeapon.transform.localScale = scale;
         }
 
 
@@ -131,15 +124,7 @@ public class PETER_EnemyAI : MonoBehaviour
             GetComponent<NavMeshAgent>().Stop();
             currState = enemyState.attacking;
             PlayAttack();
-            Attack();
         }
-
-    }
-
-
-    // Attack 
-    void Attack ()
-    {
 
     }
 
