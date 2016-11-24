@@ -4,6 +4,8 @@ using System.Collections;
 public class PETER_PlayerAttack : MonoBehaviour
 {
 
+    public bool godMode;
+
     public Transform Weapon;
     public AnimationClip AttackAnim;
     public float beginSwingTime;
@@ -32,12 +34,11 @@ public class PETER_PlayerAttack : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        beginSwingTime = Mathf.Clamp(beginSwingTime, 0, attackLength);
-        endSwingTime = Mathf.Clamp(endSwingTime, 0, attackLength - beginSwingTime);
         attackLength = AttackAnim.length;
-        hasWeapon = false;
-        playerHealth = 5;
         playerModel = GetComponent<PETER_PlayerAnimationController>().PlayerModel;
+        beginSwingTime = Mathf.Clamp(beginSwingTime, 0, (attackLength * playerModel.speed) * 2);
+        endSwingTime = Mathf.Clamp(endSwingTime, 0, (attackLength * playerModel.speed * 2) - beginSwingTime);
+        hasWeapon = false;
         currState = attackState.notAttacking;
         timer = 0.0f;
     }
@@ -47,7 +48,7 @@ public class PETER_PlayerAttack : MonoBehaviour
     void Update()
     {
 
-        Debug.Log(currState);
+        //Debug.Log(currState);
 
 
         // NOT ATTACKING STATE
@@ -58,6 +59,8 @@ public class PETER_PlayerAttack : MonoBehaviour
                 currState = attackState.beginSwing;
                 timer = 0.0f;
                 GetComponent<PETER_PlayerAnimationController>().PlayAttack();
+
+                Debug.Log(currState);
             }
         }
         
@@ -68,6 +71,8 @@ public class PETER_PlayerAttack : MonoBehaviour
             if (timer >= beginSwingTime)
             {
                 currState = attackState.midSwing;
+
+                Debug.Log(currState);
             }
         }
         
@@ -78,6 +83,8 @@ public class PETER_PlayerAttack : MonoBehaviour
             if (timer >= attackLength - endSwingTime)
             {
                 currState = attackState.endSwing;
+
+                Debug.Log(currState);
             }
         }
         
@@ -88,6 +95,8 @@ public class PETER_PlayerAttack : MonoBehaviour
             if (timer >= attackLength)
             {
                 currState = attackState.notAttacking;
+
+                Debug.Log(currState);
             }
         }
 

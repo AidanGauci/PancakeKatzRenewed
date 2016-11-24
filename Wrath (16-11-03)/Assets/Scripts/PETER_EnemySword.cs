@@ -29,9 +29,11 @@ public class PETER_EnemySword : MonoBehaviour
                 canvas.healthIcons[player.playerHealth - 1].enabled = false;
                 player.playerHealth -= 1;
             }
-            else
+            else if (!player.godMode)
             {
-                UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene");
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("DefeatScreenScene");
             }
         }
     }

@@ -124,6 +124,10 @@ public class PETER_EnemyAI : MonoBehaviour
             GetComponent<NavMeshAgent>().Stop();
             currState = enemyState.attacking;
             PlayAttack();
+
+            Vector3 AttackRot = player.transform.position;
+            AttackRot.y = transform.position.y;
+            transform.LookAt(AttackRot);
         }
 
     }

@@ -61,7 +61,9 @@ public class GameManager_Aidan : MonoBehaviour
             }
             else
             {
-                /// PAUSE MENU FUNCTION INSERT HERE
+                Cursor.visible = true;
+                Cursor.lockState = CursorLockMode.None;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenuScene");
             }
         }
 
